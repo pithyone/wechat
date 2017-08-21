@@ -5,7 +5,7 @@ namespace pithyone\wechat\Core;
 use Monolog\Logger;
 
 /**
- * Class Log
+ * Class Log.
  *
  * @method static debug($message, $context = null)
  * @method static info($message, $context = null)

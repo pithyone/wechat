@@ -19,7 +19,7 @@ class User extends Base
     const USER_AUTH_SUCCESS = '/cgi-bin/user/authsucc';
 
     /**
-     * 创建成员
+     * 创建成员.
      *
      * @param array $data
      *
@@ -31,7 +31,7 @@ class User extends Base
     }
 
     /**
-     * 读取成员
+     * 读取成员.
      *
      * @param string $userid 成员UserID
      *
@@ -43,7 +43,7 @@ class User extends Base
     }
 
     /**
-     * 更新成员
+     * 更新成员.
      *
      * @param array $data
      *
@@ -55,7 +55,7 @@ class User extends Base
     }
 
     /**
-     * 删除成员
+     * 删除成员.
      *
      * @param string $userid 成员UserID
      *
@@ -67,7 +67,7 @@ class User extends Base
     }
 
     /**
-     * 批量删除成员
+     * 批量删除成员.
      *
      * @param array $useridlist 成员UserID列表
      *
@@ -78,12 +78,11 @@ class User extends Base
         return $this->http->response('JSON', [self::USER_BATCH_DELETE, ['useridlist' => $useridlist]]);
     }
 
-
     /**
-     * 获取部门成员
+     * 获取部门成员.
      *
      * @param int $department_id 获取的部门id
-     * @param int $fetch_child 1/0：是否递归获取子部门下面的成员
+     * @param int $fetch_child   1/0：是否递归获取子部门下面的成员
      *
      * @return mixed
      */
@@ -96,10 +95,11 @@ class User extends Base
     }
 
     /**
-     * 获取部门成员详情
+     * 获取部门成员详�.
+     *
      *
      * @param int $department_id 获取的部门id
-     * @param int $fetch_child 1/0：是否递归获取子部门下面的成员
+     * @param int $fetch_child   1/0：是否递归获取子部门下面的成员
      *
      * @return mixed
      */
@@ -112,10 +112,12 @@ class User extends Base
     }
 
     /**
-     * userid转换成openid
+     * userid转换成openid.
      *
-     * @param string $userid 企业内的成员id
-     * @param int    $agentid 整型，需要发送红包的应用ID，若只是使用微信支付和企业转账，则无需该参数
+     * @param string $userid 企业�
+     * 的成员id
+     * @param int    $agentid 整型，需要发送红�
+     * 的应用ID，若只是使用微信支付和企业转账，则无需该参数
      *
      * @return mixed
      */
@@ -128,9 +130,10 @@ class User extends Base
     }
 
     /**
-     * openid转换成userid
+     * openid转换成userid.
      *
-     * @param string $open_id 在使用微信支付、微信红包和企业转账之后，返回结果的openid
+     * @param string $open_id 在使用微信支付、微信红�
+     * 和企业转账之后，返回结果的openid
      *
      * @return mixed
      */

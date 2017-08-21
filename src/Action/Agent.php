@@ -32,7 +32,7 @@ class Agent extends Base
     }
 
     /**
-     * 获取应用
+     * 获取应用.
      *
      * @return mixed
      */
@@ -42,7 +42,7 @@ class Agent extends Base
     }
 
     /**
-     * 设置应用
+     * 设置应用.
      *
      * @param array $data
      *
@@ -56,7 +56,7 @@ class Agent extends Base
     }
 
     /**
-     * 获取应用概况列表
+     * 获取应用概况列表.
      *
      * @return mixed
      */

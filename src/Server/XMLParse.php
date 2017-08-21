@@ -10,12 +10,15 @@ use pithyone\wechat\Exceptions\ServerException;
 class XMLParse
 {
     /**
-     * 提取出xml数据包中的加密消息
+     * 提取出xml数据�
+     * 中的加密消息.
      *
-     * @param string $xmltext 待提取的xml字符串
+     * @param string $xmltext �
+     * 提取的xml字符串
+     *
+     * @throws ServerException
      *
      * @return string
-     * @throws ServerException
      */
     public function extract($xmltext)
     {
@@ -32,23 +35,24 @@ class XMLParse
     }
 
     /**
-     * 生成xml消息
+     * 生成xml消息.
      *
      * @param string $encrypt 加密后的消息密文
-     * @param string $signature 安全签名
+     * @param string $signature 安�
+     * �签名
      * @param string $timestamp 时间戳
-     * @param string $nonce 随机字符串
+     * @param string $nonce     随机字符串
      *
      * @return string
      */
     public function generate($encrypt, $signature, $timestamp, $nonce)
     {
-        $format = "<xml>
+        $format = '<xml>
 <Encrypt><![CDATA[%s]]></Encrypt>
 <MsgSignature><![CDATA[%s]]></MsgSignature>
 <TimeStamp>%s</TimeStamp>
 <Nonce><![CDATA[%s]]></Nonce>
-</xml>";
+</xml>';
 
         return sprintf($format, $encrypt, $signature, $timestamp, $nonce);
     }

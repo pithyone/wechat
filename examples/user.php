@@ -37,17 +37,17 @@ $user = $contacts->user;
 $user->create([
     'userid'         => 'zhangsan',
     'name'           => '张三',
-    "english_name"   => "jackzhang",
+    'english_name'   => 'jackzhang',
     'mobile'         => '15913215421',
     'department'     => [110, 17],
-    "order"          => [10, 40],
+    'order'          => [10, 40],
     'position'       => '后台工程师',
     'gender'         => '1',
     'email'          => 'zhangsan2@gzdev.com',
-    "isleader"       => 1,
+    'isleader'       => 1,
     'enable'         => 1,
     'avatar_mediaid' => '1enMf334sxI-VWCQiscqrfg44h9zIz-5bXEzs5HujYVU',
-    "telephone"      => "020-123456",
+    'telephone'      => '020-123456',
     'extattr'        => [
         'attrs' => [
             [
@@ -69,17 +69,17 @@ $user->get('zhangsan');
 $user->update([
     'userid'         => 'zhangsan',
     'name'           => '李四',
-    "english_name"   => "jackzhang",
+    'english_name'   => 'jackzhang',
     'mobile'         => '15913215421',
     'department'     => [110],
-    "order"          => [10],
+    'order'          => [10],
     'position'       => '后台工程师',
     'gender'         => '1',
     'email'          => 'zhangsan2@gzdev.com',
-    "isleader"       => 1,
+    'isleader'       => 1,
     'enable'         => 0,
     'avatar_mediaid' => '1enMf334sxI-VWCQiscqrfg44h9zIz-5bXEzs5HujYVU',
-    "telephone"      => "020-123456",
+    'telephone'      => '020-123456',
     'extattr'        => [
         'attrs' => [
             [

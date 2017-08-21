@@ -16,7 +16,7 @@ class Attribute implements AttributeInterface
         $name = $this->getClassName();
 
         return [
-            "msgtype" => $name,
+            'msgtype' => $name,
             "$name"   => $vars,
         ];
     }

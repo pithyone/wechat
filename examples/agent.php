@@ -38,13 +38,13 @@ $agent->get();
 
 // 设置应用
 $agent->set([
-    "report_location_flag" => 0,
-    "logo_mediaid"         => "1yCUUjms50ItlZvMwYaqswc4sOL8YHYYSE3ZFXLl87JcM9AjCsQ0Au7Z15hVXnsM6",
-    "name"                 => "NAME",
-    "description"          => "DESC",
-    "redirect_domain"      => "xxxxxx",
-    "isreportenter"        => 0,
-    "home_url"             => "http://www.qq.com",
+    'report_location_flag' => 0,
+    'logo_mediaid'         => '1yCUUjms50ItlZvMwYaqswc4sOL8YHYYSE3ZFXLl87JcM9AjCsQ0Au7Z15hVXnsM6',
+    'name'                 => 'NAME',
+    'description'          => 'DESC',
+    'redirect_domain'      => 'xxxxxx',
+    'isreportenter'        => 0,
+    'home_url'             => 'http://www.qq.com',
 ]);
 
 // 获取应用概况列表

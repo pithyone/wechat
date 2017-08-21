@@ -62,7 +62,7 @@ class ServerException extends \Exception
     /**
      * {@inheritdoc}
      */
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
         if (isset($this->error[$message])) {
             $message = $this->error[$message]['message'];

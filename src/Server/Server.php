@@ -5,12 +5,12 @@ namespace pithyone\wechat\Server;
 use Arrayy\Arrayy;
 use pithyone\wechat\Core\Log;
 use pithyone\wechat\Core\XML;
-use pithyone\wechat\Exceptions\ServerException;
 use pithyone\wechat\Exceptions\RuntimeException;
+use pithyone\wechat\Exceptions\ServerException;
 use pithyone\wechat\Message\NewsArticle;
 
 /**
- * Class Server
+ * Class Server.
  *
  * @property string $msg_signature         企业微信加密签名
  * @property string $timestamp             时间戳
@@ -22,7 +22,8 @@ use pithyone\wechat\Message\NewsArticle;
  * @property string $MsgType               消息类型
  * @property int    $MsgId                 消息id
  * @property int    $AgentID               企业应用的id
- * @property string $Content               文本消息内容
+ * @property string $Content               文本消息�
+ * 容
  * @property string $PicUrl                图片链接
  * @property string $MediaId               图片媒体文件id
  * @property string $Format                语音格式，如amr，speex等
@@ -100,8 +101,10 @@ class Server
      * Server constructor.
      *
      * @param string $corpId 企业的 CorpId
-     * @param string $token 企业微信后台，开发者设置的token
-     * @param string $encodingAesKey 企业微信后台，开发者设置的EncodingAESKey
+     * @param string $token 企业微信后台，开发�
+     * 设置的token
+     * @param string $encodingAesKey 企业微信后台，开发�
+     * 设置的EncodingAESKey
      *
      * @throws ServerException
      */
@@ -133,13 +136,13 @@ class Server
     protected function initialize()
     {
         if (!$this->echostr) {
-            $object = simplexml_load_string($this->decrypt(), "SimpleXMLElement", LIBXML_NOCDATA);
+            $object = simplexml_load_string($this->decrypt(), 'SimpleXMLElement', LIBXML_NOCDATA);
 
             if ($object !== false) {
                 $json = json_encode($object);
                 $data = json_decode($json, true);
 
-                Log::debug("Receive message:", $data);
+                Log::debug('Receive message:', $data);
 
                 $data = array_merge($this->data->toArray(), $data);
                 $this->data = new Arrayy($data);
@@ -164,13 +167,14 @@ class Server
 
         $xml = XML::build($this->package);
 
-        Log::debug("Reply message:", $this->package);
+        Log::debug('Reply message:', $this->package);
 
         return $this->encrypt($xml);
     }
 
     /**
-     * @param string $content 文本消息内容
+     * @param string $content 文本消息�
+     * 容
      */
     public function setText($content)
     {
@@ -207,8 +211,8 @@ class Server
     }
 
     /**
-     * @param string $mediaId 视频文件id，可以调用获取媒体文件接口拉取
-     * @param string $title 视频消息的标题
+     * @param string $mediaId     视频文件id，可以调用获取媒体文件接口拉取
+     * @param string $title       视频消息的标题
      * @param string $description 视频消息的描述
      */
     public function setVideo($mediaId, $title, $description)
@@ -248,10 +252,11 @@ class Server
     }
 
     /**
-     * 验证URL
+     * 验证URL.
+     *
+     * @throws ServerException
      *
      * @return bool|string
-     * @throws ServerException
      */
     protected function verify()
     {
@@ -265,17 +270,18 @@ class Server
     }
 
     /**
-     * 检验消息的真实性，并且获取解密后的明文
+     * 检验消息的真实性，并且获取解密后的明文.
      *
      * @param string $message
      *
-     * @return bool|string
      * @throws ServerException
+     *
+     * @return bool|string
      */
     protected function decrypt($message = null)
     {
         if (is_null($message)) {
-            $message = file_get_contents("php://input");
+            $message = file_get_contents('php://input');
         }
 
         //提取密文
@@ -292,9 +298,11 @@ class Server
     }
 
     /**
-     * 将企业微信回复用户的消息加密打包
+     * 将企业微信回复用户的消息加密打�.
      *
-     * @param string $message 企业微信待回复用户的消息，xml格式的字符串
+     *
+     * @param string $message 企业微信�
+     * 回复用户的消息，xml格式的字符串
      *
      * @return string
      */
@@ -318,8 +326,9 @@ class Server
     /**
      * @param $name
      *
-     * @return mixed
      * @throws RuntimeException
+     *
+     * @return mixed
      */
     public function __get($name)
     {
@@ -334,4 +343,3 @@ class Server
         return $this->data;
     }
 }
-

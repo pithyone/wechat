@@ -42,7 +42,7 @@ $department->create([
 
 // 更新部门
 $department->update([
-    "id"       => 167,
+    'id'       => 167,
     'name'     => '广州研发中心',
     'parentid' => 1,
     'order'    => 1,

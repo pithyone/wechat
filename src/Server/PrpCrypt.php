@@ -18,24 +18,25 @@ class PrpCrypt
      */
     public function __construct($key)
     {
-        $this->key = base64_decode($key."=");
+        $this->key = base64_decode($key.'=');
     }
 
     /**
-     * 对明文进行加密
+     * 对明文进行加密.
      *
-     * @param string $text 需要加密的明文
+     * @param string $text   需要加密的明文
      * @param string $corpid
      *
-     * @return string 加密后的密文
      * @throws ServerException
+     *
+     * @return string 加密后的密文
      */
     public function encrypt($text, $corpid)
     {
         try {
             //获得16位随机字符串，填充到明文之前
             $random = $this->getRandomStr();
-            $text = $random.pack("N", strlen($text)).$text.$corpid;
+            $text = $random.pack('N', strlen($text)).$text.$corpid;
 
             // 网络字节序
             $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
@@ -58,13 +59,14 @@ class PrpCrypt
     }
 
     /**
-     * 对密文进行解密
+     * 对密文进行解密.
      *
      * @param string $encrypted 需要解密的密文
      * @param string $corpid
      *
-     * @return bool|string 解密得到的明文
      * @throws ServerException
+     *
+     * @return bool|string 解密得到的明文
      */
     public function decrypt($encrypted, $corpid)
     {
@@ -90,10 +92,10 @@ class PrpCrypt
 
             //去除16位随机字符串,网络字节序和AppId
             if (strlen($result) < 16) {
-                return "";
+                return '';
             }
             $content = substr($result, 16, strlen($result));
-            $len_list = unpack("N", substr($content, 0, 4));
+            $len_list = unpack('N', substr($content, 0, 4));
             $xml_len = $len_list[1];
             $xml_content = substr($content, 4, $xml_len);
             $from_corpid = substr($content, $xml_len + 4);
@@ -109,14 +111,14 @@ class PrpCrypt
     }
 
     /**
-     * 随机生成16位字符串
+     * 随机生成16位字符串.
      *
      * @return string
      */
     public function getRandomStr()
     {
-        $str = "";
-        $str_pol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        $str = '';
+        $str_pol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         $max = strlen($str_pol) - 1;
 
         for ($i = 0; $i < 16; $i++) {

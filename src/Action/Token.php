@@ -74,8 +74,9 @@ class Token
     }
 
     /**
-     * @return mixed
      * @throws HttpException
+     *
+     * @return mixed
      */
     protected function getFromServer()
     {

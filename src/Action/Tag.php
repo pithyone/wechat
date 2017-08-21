@@ -16,7 +16,7 @@ class Tag extends Base
     const TAG_LIST = '/cgi-bin/tag/list';
 
     /**
-     * 创建标签
+     * 创建标签.
      *
      * @param array $data
      *
@@ -28,7 +28,7 @@ class Tag extends Base
     }
 
     /**
-     * 更新标签
+     * 更新标签.
      *
      * @param array $data
      *
@@ -40,7 +40,7 @@ class Tag extends Base
     }
 
     /**
-     * 删除标签
+     * 删除标签.
      *
      * @param int $tagid 标签ID
      *
@@ -52,7 +52,7 @@ class Tag extends Base
     }
 
     /**
-     * 获取标签成员
+     * 获取标签成员.
      *
      * @param int $tagid 标签ID
      *
@@ -64,7 +64,7 @@ class Tag extends Base
     }
 
     /**
-     * 增加标签成员
+     * 增加标签成员.
      *
      * @param array $data
      *
@@ -76,7 +76,7 @@ class Tag extends Base
     }
 
     /**
-     * 删除标签成员
+     * 删除标签成员.
      *
      * @param array $data
      *
@@ -88,7 +88,7 @@ class Tag extends Base
     }
 
     /**
-     * 获取标签列表
+     * 获取标签列表.
      *
      * @return mixed
      */

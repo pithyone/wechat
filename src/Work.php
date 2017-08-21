@@ -26,7 +26,7 @@ use pithyone\wechat\Exceptions\RuntimeException;
 use pithyone\wechat\Server\Server;
 
 /**
- * Class Application
+ * Class Application.
  *
  * @property \pithyone\wechat\Action\Agent      $agent
  * @property \pithyone\wechat\Action\Batch      $batch
@@ -127,13 +127,14 @@ class Work
     /**
      * @param string $agentId
      *
-     * @return $this
      * @throws RuntimeException
+     *
+     * @return $this
      */
     public function setAgentId($agentId)
     {
         if (empty($this->config->get($agentId))) {
-            throw new RuntimeException("No agent is selected.");
+            throw new RuntimeException('No agent is selected.');
         }
 
         $old_agentId = $this->agentId;
@@ -150,8 +151,9 @@ class Work
     /**
      * @param string $name
      *
-     * @return mixed
      * @throws RuntimeException
+     *
+     * @return mixed
      */
     public function __get($name)
     {

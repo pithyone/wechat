@@ -73,7 +73,7 @@ $message->touser(['wb'])->send($file);
 // 文本卡片消息
 $textCard = new TextCard();
 $textCard->title = '领奖通知';
-$textCard->description = "<div class=\"gray\">2016年9月26日</div> <div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>";
+$textCard->description = '<div class="gray">2016年9月26日</div> <div class="normal">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class="highlight">请于2016年10月10日前联系行政同事领取</div>';
 $textCard->url = 'http://www.soso.com';
 $textCard->btntxt = '查看详情';
 $message->touser(['wb'])->send($textCard);

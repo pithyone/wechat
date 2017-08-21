@@ -13,7 +13,7 @@ class Batch extends Base
     const BATCH_GET_RESULT = '/cgi-bin/batch/getresult';
 
     /**
-     * 增量更新成员
+     * 增量更新成员.
      *
      * @param array $data
      *
@@ -25,7 +25,8 @@ class Batch extends Base
     }
 
     /**
-     * 全量覆盖成员
+     * �
+     * �量覆盖成员.
      *
      * @param array $data
      *
@@ -37,7 +38,8 @@ class Batch extends Base
     }
 
     /**
-     * 全量覆盖部门
+     * �
+     * �量覆盖部门.
      *
      * @param array $data
      *
@@ -49,7 +51,7 @@ class Batch extends Base
     }
 
     /**
-     * 获取异步任务结果
+     * 获取异步任务结果.
      *
      * @param string $jobid 异步任务id
      *

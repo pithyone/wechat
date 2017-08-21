@@ -27,7 +27,7 @@ class Menu extends Base
     }
 
     /**
-     * 创建应用菜单
+     * 创建应用菜单.
      *
      * @param array $data
      *
@@ -39,7 +39,7 @@ class Menu extends Base
     }
 
     /**
-     * 获取菜单列表
+     * 获取菜单列表.
      *
      * @return mixed
      */
@@ -49,7 +49,7 @@ class Menu extends Base
     }
 
     /**
-     * 删除应用菜单
+     * 删除应用菜单.
      *
      * @return mixed
      */

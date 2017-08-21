@@ -8,10 +8,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
-use pithyone\wechat\Exceptions\HttpException;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
+use pithyone\wechat\Exceptions\HttpException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Http.
@@ -88,8 +88,9 @@ class Http
      * @param string $method
      * @param array  $param_arr
      *
-     * @return mixed
      * @throws HttpException
+     *
+     * @return mixed
      */
     public function response($method, $param_arr = [])
     {

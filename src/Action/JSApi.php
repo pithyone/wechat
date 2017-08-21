@@ -39,7 +39,7 @@ class JSApi extends Base
     }
 
     /**
-     * 获取企业微信JS接口临时票据
+     * 获取企业微信JS接口临时票据.
      *
      * @return mixed 临时票据字符串
      */
@@ -59,7 +59,7 @@ class JSApi extends Base
     }
 
     /**
-     * 获取企业微信JS接口临时票据
+     * 获取企业微信JS接口临时票据.
      *
      * @return array 临时票据字符串和过期时间数组
      */
@@ -81,8 +81,9 @@ class JSApi extends Base
     }
 
     /**
-     * @return mixed
      * @throws HttpException
+     *
+     * @return mixed
      */
     protected function getTicketFromServer()
     {
@@ -104,7 +105,7 @@ class JSApi extends Base
 
         $timestamp = time();
 
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
         $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         $ticket = $this->getTicket();
@@ -113,12 +114,12 @@ class JSApi extends Base
         $signature = sha1($rawString);
 
         return [
-            "appId"     => $this->corpId,
-            "nonceStr"  => $nonceStr,
-            "timestamp" => $timestamp,
-            "url"       => $url,
-            "signature" => $signature,
-            "rawString" => $rawString,
+            'appId'     => $this->corpId,
+            'nonceStr'  => $nonceStr,
+            'timestamp' => $timestamp,
+            'url'       => $url,
+            'signature' => $signature,
+            'rawString' => $rawString,
         ];
     }
 }

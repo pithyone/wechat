@@ -3,7 +3,7 @@
 namespace pithyone\wechat\Message;
 
 /**
- * Class News
+ * Class News.
  *
  * @property mixed $articles
  */

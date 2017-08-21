@@ -13,7 +13,7 @@ class Department extends Base
     const DEPARTMENT_LIST = '/cgi-bin/department/list';
 
     /**
-     * 创建部门
+     * 创建部门.
      *
      * @param array $data
      *
@@ -25,7 +25,7 @@ class Department extends Base
     }
 
     /**
-     * 更新部门
+     * 更新部门.
      *
      * @param array $data
      *
@@ -37,7 +37,7 @@ class Department extends Base
     }
 
     /**
-     * 删除部门
+     * 删除部门.
      *
      * @param int $id 部门id。（注：不能删除根部门；不能删除含有子部门、成员的部门）
      *
@@ -49,9 +49,11 @@ class Department extends Base
     }
 
     /**
-     * 获取部门列表
+     * 获取部门列表.
      *
-     * @param int $id 部门id。获取指定部门及其下的子部门。 如果不填，默认获取全量组织架构
+     * @param int $id 部门id。获取指定部门及�
+     * �下的子部门。 如果不填，默认获取�
+     * �量组织架构
      *
      * @return mixed
      */

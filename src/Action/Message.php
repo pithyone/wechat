@@ -6,7 +6,7 @@ use pithyone\wechat\Core\Http;
 use pithyone\wechat\Message\AttributeInterface;
 
 /**
- * Class Message
+ * Class Message.
  *
  * @method $this touser(array $touser)
  * @method $this toparty(array $toparty)
@@ -36,7 +36,7 @@ class Message extends Base
     }
 
     /**
-     * 发消息
+     * 发消息.
      *
      * @param AttributeInterface $handler
      *

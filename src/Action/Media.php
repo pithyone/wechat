@@ -11,7 +11,7 @@ class Media extends Base
     const MEDIA_GET = '/cgi-bin/media/get';
 
     /**
-     * 上传临时素材文件
+     * 上传临时素材文件.
      *
      * @param string $type 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件(file)
      * @param string $path 文件位置，绝对路径
@@ -26,7 +26,7 @@ class Media extends Base
     }
 
     /**
-     * 获取临时素材文件
+     * 获取临时素材文件.
      *
      * @param string $media_id 媒体文件id
      *
