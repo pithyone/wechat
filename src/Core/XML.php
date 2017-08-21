@@ -2,16 +2,17 @@
 
 namespace pithyone\wechat\Core;
 
-
 use LSS\Array2XML;
 
+/**
+ * Class XML.
+ */
 class XML
 {
     /**
      * @param array $data
      *
      * @return string
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public static function build(array $data)
     {
@@ -23,8 +24,6 @@ class XML
 
     /**
      * @param array $array
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected static function parseArray(array &$array)
     {

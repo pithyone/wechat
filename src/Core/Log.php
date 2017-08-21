@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Core;
 
-
 use Monolog\Logger;
 
 /**
@@ -16,8 +15,6 @@ use Monolog\Logger;
  * @method static critical($message, $context = null)
  * @method static alert($message, $context = null)
  * @method static emergency($message, $context = null)
- *
- * @package pithyone\zhihu\crawler
  */
 class Log
 {
@@ -28,7 +25,6 @@ class Log
 
     /**
      * @return Logger
-     * @author wangbing <pithyone@vip.qq.com>
      */
     private static function createLogger()
     {
@@ -39,7 +35,6 @@ class Log
 
     /**
      * @return \Psr\Log\LoggerInterface
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public static function getLogger()
     {
@@ -59,7 +54,6 @@ class Log
      * @param $args
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public static function __callStatic($method, $args)
     {
@@ -71,7 +65,6 @@ class Log
      * @param $args
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function __call($method, $args)
     {

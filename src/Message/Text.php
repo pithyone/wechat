@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Message;
 
-
+/**
+ * Class Text.
+ */
 class Text extends Attribute
 {
     /**

@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat;
 
-
 use Arrayy\Arrayy;
 use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\FilesystemCache;
@@ -40,7 +39,6 @@ use pithyone\wechat\Server\Server;
  * @property \pithyone\wechat\Action\Tag        $tag
  * @property \pithyone\wechat\Action\User       $user
  * @property \pithyone\wechat\Server\Server     $server
- *
  */
 class Work
 {
@@ -89,9 +87,6 @@ class Work
         $this->initializeCache();
     }
 
-    /**
-     * @author wangbing <pithyone@vip.qq.com>
-     */
     private function initializeLogger()
     {
         $logger = new Logger('WorkWeChat');
@@ -107,9 +102,6 @@ class Work
         Log::setLogger($logger);
     }
 
-    /**
-     * @author wangbing <pithyone@vip.qq.com>
-     */
     private function initializeCache()
     {
         if (!($this->config->get('cache') && ($this->config->get('cache') instanceof CacheProvider))) {
@@ -119,7 +111,6 @@ class Work
 
     /**
      * @return Token
-     * @author wangbing <pithyone@vip.qq.com>
      */
     private function newToken()
     {
@@ -138,7 +129,6 @@ class Work
      *
      * @return $this
      * @throws RuntimeException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setAgentId($agentId)
     {
@@ -162,7 +152,6 @@ class Work
      *
      * @return mixed
      * @throws RuntimeException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function __get($name)
     {

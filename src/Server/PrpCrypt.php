@@ -2,9 +2,11 @@
 
 namespace pithyone\wechat\Server;
 
-
 use pithyone\wechat\Exceptions\ServerException;
 
+/**
+ * Class PrpCrypt.
+ */
 class PrpCrypt
 {
     public $key;
@@ -16,7 +18,7 @@ class PrpCrypt
      */
     public function __construct($key)
     {
-        $this->key = base64_decode($key . "=");
+        $this->key = base64_decode($key."=");
     }
 
     /**
@@ -27,14 +29,13 @@ class PrpCrypt
      *
      * @return string 加密后的密文
      * @throws ServerException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function encrypt($text, $corpid)
     {
         try {
             //获得16位随机字符串，填充到明文之前
             $random = $this->getRandomStr();
-            $text = $random . pack("N", strlen($text)) . $text . $corpid;
+            $text = $random.pack("N", strlen($text)).$text.$corpid;
 
             // 网络字节序
             $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
@@ -64,7 +65,6 @@ class PrpCrypt
      *
      * @return bool|string 解密得到的明文
      * @throws ServerException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function decrypt($encrypted, $corpid)
     {
@@ -112,7 +112,6 @@ class PrpCrypt
      * 随机生成16位字符串
      *
      * @return string
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getRandomStr()
     {

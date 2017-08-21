@@ -2,13 +2,17 @@
 
 namespace pithyone\wechat\Action;
 
-
 use Doctrine\Common\Cache\CacheProvider;
 use pithyone\wechat\Core\Http;
 use pithyone\wechat\Exceptions\HttpException;
 
+/**
+ * Class JSApi.
+ */
 class JSApi extends Base
 {
+    const GET_TICKET = '/cgi-bin/get_jsapi_ticket';
+
     /**
      * @var CacheProvider
      */
@@ -18,8 +22,6 @@ class JSApi extends Base
      * @var string
      */
     protected $corpId;
-
-    const GET_TICKET = '/cgi-bin/get_jsapi_ticket';
 
     /**
      * JSApi constructor.
@@ -40,7 +42,6 @@ class JSApi extends Base
      * 获取企业微信JS接口临时票据
      *
      * @return mixed 临时票据字符串
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getTicket()
     {
@@ -61,7 +62,6 @@ class JSApi extends Base
      * 获取企业微信JS接口临时票据
      *
      * @return array 临时票据字符串和过期时间数组
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getTicketArray()
     {
@@ -83,7 +83,6 @@ class JSApi extends Base
     /**
      * @return mixed
      * @throws HttpException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getTicketFromServer()
     {
@@ -98,7 +97,6 @@ class JSApi extends Base
 
     /**
      * @return array
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function sign()
     {
@@ -120,7 +118,7 @@ class JSApi extends Base
             "timestamp" => $timestamp,
             "url"       => $url,
             "signature" => $signature,
-            "rawString" => $rawString
+            "rawString" => $rawString,
         ];
     }
 }

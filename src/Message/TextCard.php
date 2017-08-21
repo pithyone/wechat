@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Message;
 
-
+/**
+ * Class TextCard.
+ */
 class TextCard extends Attribute
 {
     /**

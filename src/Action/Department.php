@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
-
+/**
+ * Class Department.
+ */
 class Department extends Base
 {
     const DEPARTMENT_CREATE = '/cgi-bin/department/create';
@@ -15,15 +17,7 @@ class Department extends Base
      *
      * @param array $data
      *
-     * {
-     * "name": "广州研发中心",
-     * "parentid": 1,
-     * "order": 1,
-     * "id": 2
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function create($data)
     {
@@ -35,15 +29,7 @@ class Department extends Base
      *
      * @param array $data
      *
-     * {
-     * "id": 2,
-     * "name": "广州研发中心",
-     * "parentid": 1,
-     * "order": 1
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function update($data)
     {
@@ -56,7 +42,6 @@ class Department extends Base
      * @param int $id 部门id。（注：不能删除根部门；不能删除含有子部门、成员的部门）
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function delete($id)
     {
@@ -69,7 +54,6 @@ class Department extends Base
      * @param int $id 部门id。获取指定部门及其下的子部门。 如果不填，默认获取全量组织架构
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function lists($id = null)
     {

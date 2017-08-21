@@ -6,8 +6,13 @@ use Doctrine\Common\Cache\CacheProvider;
 use pithyone\wechat\Core\Http;
 use pithyone\wechat\Exceptions\HttpException;
 
+/**
+ * Class Token.
+ */
 class Token
 {
+    const GET_TOKEN = '/cgi-bin/gettoken';
+
     /**
      * @var string
      */
@@ -33,8 +38,6 @@ class Token
      */
     protected $cacheId;
 
-    const GET_TOKEN = '/cgi-bin/gettoken';
-
     /**
      * Token constructor.
      *
@@ -56,7 +59,6 @@ class Token
      * @param bool $forceRefresh
      *
      * @return false|mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function get($forceRefresh = false)
     {
@@ -74,12 +76,12 @@ class Token
     /**
      * @return mixed
      * @throws HttpException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getFromServer()
     {
         $http = new Http();
-        $response = $http->response('GET', [self::GET_TOKEN, ['corpid' => $this->corpId, 'corpsecret' => $this->secret]]);
+        $response = $http->response('GET',
+            [self::GET_TOKEN, ['corpid' => $this->corpId, 'corpsecret' => $this->secret]]);
 
         if (!isset($response['access_token']) || empty($response['access_token'])) {
             throw new HttpException('get access token error');

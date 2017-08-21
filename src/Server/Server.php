@@ -99,8 +99,8 @@ class Server
     /**
      * Server constructor.
      *
-     * @param string $corpId         企业的 CorpId
-     * @param string $token          企业微信后台，开发者设置的token
+     * @param string $corpId 企业的 CorpId
+     * @param string $token 企业微信后台，开发者设置的token
      * @param string $encodingAesKey 企业微信后台，开发者设置的EncodingAESKey
      *
      * @throws ServerException
@@ -121,9 +121,6 @@ class Server
         $this->initialize();
     }
 
-    /**
-     * @author wangbing <pithyone@vip.qq.com>
-     */
     protected function initializeParam()
     {
         foreach ($_GET as &$value) {
@@ -133,9 +130,6 @@ class Server
         $this->data = new Arrayy($_GET);
     }
 
-    /**
-     * @author wangbing <pithyone@vip.qq.com>
-     */
     protected function initialize()
     {
         if (!$this->echostr) {
@@ -155,7 +149,6 @@ class Server
 
     /**
      * @return bool|string
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function reply()
     {
@@ -166,7 +159,7 @@ class Server
         $this->package = array_merge($this->package, [
             'ToUserName'   => $this->FromUserName,
             'FromUserName' => $this->ToUserName,
-            'CreateTime'   => $this->timestamp
+            'CreateTime'   => $this->timestamp,
         ]);
 
         $xml = XML::build($this->package);
@@ -178,53 +171,45 @@ class Server
 
     /**
      * @param string $content 文本消息内容
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setText($content)
     {
         $this->package = array_merge($this->package, [
             'MsgType' => 'text',
-            'Content' => $content
+            'Content' => $content,
         ]);
     }
 
     /**
      * @param string $mediaId 图片媒体文件id，可以调用获取媒体文件接口拉取
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setImage($mediaId)
     {
         $this->package = array_merge($this->package, [
             'MsgType' => 'image',
             'Image'   => [
-                'MediaId' => $mediaId
-            ]
+                'MediaId' => $mediaId,
+            ],
         ]);
     }
 
     /**
      * @param string $mediaId 语音文件id，可以调用获取媒体文件接口拉取
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setVoice($mediaId)
     {
         $this->package = array_merge($this->package, [
             'MsgType' => 'voice',
             'Voice'   => [
-                'MediaId' => $mediaId
-            ]
+                'MediaId' => $mediaId,
+            ],
         ]);
     }
 
     /**
-     * @param string $mediaId     视频文件id，可以调用获取媒体文件接口拉取
-     * @param string $title       视频消息的标题
+     * @param string $mediaId 视频文件id，可以调用获取媒体文件接口拉取
+     * @param string $title 视频消息的标题
      * @param string $description 视频消息的描述
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setVideo($mediaId, $title, $description)
     {
@@ -233,15 +218,13 @@ class Server
             'Video'   => [
                 'MediaId'     => $mediaId,
                 'Title'       => $title,
-                'Description' => $description
-            ]
+                'Description' => $description,
+            ],
         ]);
     }
 
     /**
      * @param array|NewsArticle $news
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setNews($news)
     {
@@ -253,14 +236,14 @@ class Server
                 'Title'       => $article->title,
                 'Description' => $article->description,
                 'PicUrl'      => $article->picurl,
-                'Url'         => $article->url
+                'Url'         => $article->url,
             ];
         }
 
         $this->package = array_merge($this->package, [
             'MsgType'      => 'news',
             'ArticleCount' => count($articles),
-            'Articles'     => $articles
+            'Articles'     => $articles,
         ]);
     }
 
@@ -269,7 +252,6 @@ class Server
      *
      * @return bool|string
      * @throws ServerException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function verify()
     {
@@ -289,7 +271,6 @@ class Server
      *
      * @return bool|string
      * @throws ServerException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function decrypt($message = null)
     {
@@ -316,7 +297,6 @@ class Server
      * @param string $message 企业微信待回复用户的消息，xml格式的字符串
      *
      * @return string
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function encrypt($message)
     {
@@ -340,7 +320,6 @@ class Server
      *
      * @return mixed
      * @throws RuntimeException
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function __get($name)
     {

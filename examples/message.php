@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use pithyone\wechat\Message\File;
 use pithyone\wechat\Message\Image;
@@ -15,27 +15,27 @@ use pithyone\wechat\Message\Voice;
 use pithyone\wechat\Work;
 
 spl_autoload_register(function ($c) {
-    @include_once strtr($c, '\\_', '//') . '.php';
+    @include_once strtr($c, '\\_', '//').'.php';
 });
-set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__DIR__) . '/src');
+set_include_path(get_include_path().PATH_SEPARATOR.dirname(__DIR__).'/src');
 
 $config = [
     'debug'    => true,
     'log'      => [
-        'file' => __DIR__ . '/../tmp/work-wechat.log'
+        'file' => __DIR__.'/../tmp/work-wechat.log',
     ],
     'corp_id'  => 'your-corp-id',
     'contacts' => [
         'token'   => 'your-contacts-agent-token',
         'aes_key' => 'your-contacts-agent-aes-key',
-        'secret'  => 'your-contacts-agent-secret'
+        'secret'  => 'your-contacts-agent-secret',
     ],
     'test'     => [
         'agent_id' => 'your-test-agent-id',
         'token'    => 'your-test-agent-token',
         'aes_key'  => 'your-test-agent-aes-key',
-        'secret'   => 'your-test-agent-secret'
-    ]
+        'secret'   => 'your-test-agent-secret',
+    ],
 ];
 
 $work = new Work($config);

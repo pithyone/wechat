@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
-
+/**
+ * Class Batch.
+ */
 class Batch extends Base
 {
     const BATCH_SYNC_USER = '/cgi-bin/batch/syncuser';
@@ -15,18 +17,7 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function syncUser($data)
     {
@@ -38,18 +29,7 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function replaceUser($data)
     {
@@ -61,18 +41,7 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function replaceParty($data)
     {
@@ -85,7 +54,6 @@ class Batch extends Base
      * @param string $jobid 异步任务id
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function result($jobid)
     {

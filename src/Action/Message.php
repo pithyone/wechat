@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Action;
 
-
 use pithyone\wechat\Core\Http;
 use pithyone\wechat\Message\AttributeInterface;
 
@@ -13,7 +12,6 @@ use pithyone\wechat\Message\AttributeInterface;
  * @method $this toparty(array $toparty)
  * @method $this totag(array $totag)
  * @method $this safe($safe = 0)
- *
  */
 class Message extends Base
 {
@@ -43,7 +41,6 @@ class Message extends Base
      * @param AttributeInterface $handler
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function send(AttributeInterface $handler)
     {
@@ -57,7 +54,6 @@ class Message extends Base
      * @param $args
      *
      * @return $this
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function __call($method, $args)
     {

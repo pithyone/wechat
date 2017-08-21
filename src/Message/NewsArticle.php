@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Message;
 
-
+/**
+ * Class NewsArticle.
+ */
 class NewsArticle
 {
     /**

@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
-
+/**
+ * Class Media.
+ */
 class Media extends Base
 {
     const MEDIA_UPLOAD = '/cgi-bin/media/upload';
@@ -15,7 +17,6 @@ class Media extends Base
      * @param string $path 文件位置，绝对路径
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function upload($type, $path)
     {
@@ -30,7 +31,6 @@ class Media extends Base
      * @param string $media_id 媒体文件id
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function get($media_id)
     {

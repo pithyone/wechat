@@ -2,12 +2,13 @@
 
 namespace pithyone\wechat\Message;
 
-
+/**
+ * Interface AttributeInterface.
+ */
 interface AttributeInterface
 {
     /**
      * @return array
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function get();
 }

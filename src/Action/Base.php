@@ -2,9 +2,11 @@
 
 namespace pithyone\wechat\Action;
 
-
 use pithyone\wechat\Core\Http;
 
+/**
+ * Class Base.
+ */
 class Base
 {
     /**

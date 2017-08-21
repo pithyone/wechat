@@ -2,7 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
-
+/**
+ * Class Tag.
+ */
 class Tag extends Base
 {
     const TAG_CREATE = '/cgi-bin/tag/create';
@@ -18,13 +20,7 @@ class Tag extends Base
      *
      * @param array $data
      *
-     * {
-     * "tagname": "UI",
-     * "tagid": 12
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function create($data)
     {
@@ -36,13 +32,7 @@ class Tag extends Base
      *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "tagname": "UI design"
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function update($data)
     {
@@ -55,7 +45,6 @@ class Tag extends Base
      * @param int $tagid 标签ID
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function delete($tagid)
     {
@@ -68,7 +57,6 @@ class Tag extends Base
      * @param int $tagid 标签ID
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function get($tagid)
     {
@@ -80,14 +68,7 @@ class Tag extends Base
      *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "userlist":[ "user1","user2"],
-     * "partylist": [4]
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function addUsers($data)
     {
@@ -99,14 +80,7 @@ class Tag extends Base
      *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "userlist":[ "user1","user2"],
-     * "partylist":[2,4]
-     * }
-     *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function delUsers($data)
     {
@@ -117,7 +91,6 @@ class Tag extends Base
      * 获取标签列表
      *
      * @return mixed
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function lists()
     {
