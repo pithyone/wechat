@@ -5,12 +5,12 @@ namespace pithyone\wechat\Server;
 use Arrayy\Arrayy;
 use pithyone\wechat\Core\Log;
 use pithyone\wechat\Core\XML;
-use pithyone\wechat\Exceptions\ServerException;
 use pithyone\wechat\Exceptions\RuntimeException;
+use pithyone\wechat\Exceptions\ServerException;
 use pithyone\wechat\Message\NewsArticle;
 
 /**
- * Class Server
+ * Class Server.
  *
  * @property string $msg_signature         企业微信加密签名
  * @property string $timestamp             时间戳
@@ -139,13 +139,13 @@ class Server
     protected function initialize()
     {
         if (!$this->echostr) {
-            $object = simplexml_load_string($this->decrypt(), "SimpleXMLElement", LIBXML_NOCDATA);
+            $object = simplexml_load_string($this->decrypt(), 'SimpleXMLElement', LIBXML_NOCDATA);
 
             if ($object !== false) {
                 $json = json_encode($object);
                 $data = json_decode($json, true);
 
-                Log::debug("Receive message:", $data);
+                Log::debug('Receive message:', $data);
 
                 $data = array_merge($this->data->toArray(), $data);
                 $this->data = new Arrayy($data);
@@ -155,6 +155,7 @@ class Server
 
     /**
      * @return bool|string
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function reply()
@@ -166,12 +167,12 @@ class Server
         $this->package = array_merge($this->package, [
             'ToUserName'   => $this->FromUserName,
             'FromUserName' => $this->ToUserName,
-            'CreateTime'   => $this->timestamp
+            'CreateTime'   => $this->timestamp,
         ]);
 
         $xml = XML::build($this->package);
 
-        Log::debug("Reply message:", $this->package);
+        Log::debug('Reply message:', $this->package);
 
         return $this->encrypt($xml);
     }
@@ -185,7 +186,7 @@ class Server
     {
         $this->package = array_merge($this->package, [
             'MsgType' => 'text',
-            'Content' => $content
+            'Content' => $content,
         ]);
     }
 
@@ -199,8 +200,8 @@ class Server
         $this->package = array_merge($this->package, [
             'MsgType' => 'image',
             'Image'   => [
-                'MediaId' => $mediaId
-            ]
+                'MediaId' => $mediaId,
+            ],
         ]);
     }
 
@@ -214,8 +215,8 @@ class Server
         $this->package = array_merge($this->package, [
             'MsgType' => 'voice',
             'Voice'   => [
-                'MediaId' => $mediaId
-            ]
+                'MediaId' => $mediaId,
+            ],
         ]);
     }
 
@@ -233,8 +234,8 @@ class Server
             'Video'   => [
                 'MediaId'     => $mediaId,
                 'Title'       => $title,
-                'Description' => $description
-            ]
+                'Description' => $description,
+            ],
         ]);
     }
 
@@ -253,22 +254,24 @@ class Server
                 'Title'       => $article->title,
                 'Description' => $article->description,
                 'PicUrl'      => $article->picurl,
-                'Url'         => $article->url
+                'Url'         => $article->url,
             ];
         }
 
         $this->package = array_merge($this->package, [
             'MsgType'      => 'news',
             'ArticleCount' => count($articles),
-            'Articles'     => $articles
+            'Articles'     => $articles,
         ]);
     }
 
     /**
-     * 验证URL
+     * 验证URL.
+     *
+     * @throws ServerException
      *
      * @return bool|string
-     * @throws ServerException
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     protected function verify()
@@ -283,18 +286,20 @@ class Server
     }
 
     /**
-     * 检验消息的真实性，并且获取解密后的明文
+     * 检验消息的真实性，并且获取解密后的明文.
      *
      * @param string $message
      *
-     * @return bool|string
      * @throws ServerException
+     *
+     * @return bool|string
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     protected function decrypt($message = null)
     {
         if (is_null($message)) {
-            $message = file_get_contents("php://input");
+            $message = file_get_contents('php://input');
         }
 
         //提取密文
@@ -311,11 +316,12 @@ class Server
     }
 
     /**
-     * 将企业微信回复用户的消息加密打包
+     * 将企业微信回复用户的消息加密打包.
      *
      * @param string $message 企业微信待回复用户的消息，xml格式的字符串
      *
      * @return string
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     protected function encrypt($message)
@@ -338,8 +344,10 @@ class Server
     /**
      * @param $name
      *
-     * @return mixed
      * @throws RuntimeException
+     *
+     * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function __get($name)
@@ -355,4 +363,3 @@ class Server
         return $this->data;
     }
 }
-

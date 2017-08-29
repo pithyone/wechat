@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Action;
 
-
 use pithyone\wechat\Core\Http;
 
 class Menu extends Base
@@ -25,11 +24,12 @@ class Menu extends Base
     }
 
     /**
-     * 创建应用菜单
+     * 创建应用菜单.
      *
      * @param array $data
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function create(array $data)
@@ -38,9 +38,10 @@ class Menu extends Base
     }
 
     /**
-     * 获取菜单列表
+     * 获取菜单列表.
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function get()
@@ -49,9 +50,10 @@ class Menu extends Base
     }
 
     /**
-     * 删除应用菜单
+     * 删除应用菜单.
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function delete()

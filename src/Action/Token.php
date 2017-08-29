@@ -56,6 +56,7 @@ class Token
      * @param bool $forceRefresh
      *
      * @return false|mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function get($forceRefresh = false)
@@ -72,8 +73,10 @@ class Token
     }
 
     /**
-     * @return mixed
      * @throws HttpException
+     *
+     * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getFromServer()

@@ -1,31 +1,31 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use pithyone\wechat\Work;
 
 spl_autoload_register(function ($c) {
-    @include_once strtr($c, '\\_', '//') . '.php';
+    @include_once strtr($c, '\\_', '//').'.php';
 });
-set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__DIR__) . '/src');
+set_include_path(get_include_path().PATH_SEPARATOR.dirname(__DIR__).'/src');
 
 $config = [
     'debug'    => true,
     'log'      => [
-        'file' => __DIR__ . '/../tmp/work-wechat.log'
+        'file' => __DIR__.'/../tmp/work-wechat.log',
     ],
     'corp_id'  => 'your-corp-id',
     'contacts' => [
         'token'   => 'your-contacts-agent-token',
         'aes_key' => 'your-contacts-agent-aes-key',
-        'secret'  => 'your-contacts-agent-secret'
+        'secret'  => 'your-contacts-agent-secret',
     ],
     'test'     => [
         'agent_id' => 'your-test-agent-id',
         'token'    => 'your-test-agent-token',
         'aes_key'  => 'your-test-agent-aes-key',
-        'secret'   => 'your-test-agent-secret'
-    ]
+        'secret'   => 'your-test-agent-secret',
+    ],
 ];
 
 $work = new Work($config);
@@ -37,17 +37,17 @@ $user = $contacts->user;
 $user->create([
     'userid'         => 'zhangsan',
     'name'           => '张三',
-    "english_name"   => "jackzhang",
+    'english_name'   => 'jackzhang',
     'mobile'         => '15913215421',
     'department'     => [110, 17],
-    "order"          => [10, 40],
+    'order'          => [10, 40],
     'position'       => '后台工程师',
     'gender'         => '1',
     'email'          => 'zhangsan2@gzdev.com',
-    "isleader"       => 1,
+    'isleader'       => 1,
     'enable'         => 1,
     'avatar_mediaid' => '1enMf334sxI-VWCQiscqrfg44h9zIz-5bXEzs5HujYVU',
-    "telephone"      => "020-123456",
+    'telephone'      => '020-123456',
     'extattr'        => [
         'attrs' => [
             [
@@ -57,9 +57,9 @@ $user->create([
             [
                 'name'  => '卡号',
                 'value' => '1234567234',
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ]);
 
 // 读取成员
@@ -69,17 +69,17 @@ $user->get('zhangsan');
 $user->update([
     'userid'         => 'zhangsan',
     'name'           => '李四',
-    "english_name"   => "jackzhang",
+    'english_name'   => 'jackzhang',
     'mobile'         => '15913215421',
     'department'     => [110],
-    "order"          => [10],
+    'order'          => [10],
     'position'       => '后台工程师',
     'gender'         => '1',
     'email'          => 'zhangsan2@gzdev.com',
-    "isleader"       => 1,
+    'isleader'       => 1,
     'enable'         => 0,
     'avatar_mediaid' => '1enMf334sxI-VWCQiscqrfg44h9zIz-5bXEzs5HujYVU',
-    "telephone"      => "020-123456",
+    'telephone'      => '020-123456',
     'extattr'        => [
         'attrs' => [
             [
@@ -89,9 +89,9 @@ $user->update([
             [
                 'name'  => '卡号',
                 'value' => '1234567234',
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ]);
 
 // 删除成员

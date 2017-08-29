@@ -2,13 +2,10 @@
 
 namespace pithyone\wechat\Message;
 
-
 /**
- * Class News
+ * Class News.
  *
  * @property mixed $articles
- *
- * @package pithyone\wechat\Message
  */
 class News extends Attribute
 {

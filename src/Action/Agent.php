@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Action;
 
-
 use pithyone\wechat\Core\Http;
 
 class Agent extends Base
@@ -30,9 +29,10 @@ class Agent extends Base
     }
 
     /**
-     * 获取应用
+     * 获取应用.
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function get()
@@ -41,7 +41,7 @@ class Agent extends Base
     }
 
     /**
-     * 设置应用
+     * 设置应用.
      *
      * @param array $data
      *
@@ -56,6 +56,7 @@ class Agent extends Base
      * }
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function set(array $data)
@@ -66,9 +67,10 @@ class Agent extends Base
     }
 
     /**
-     * 获取应用概况列表
+     * 获取应用概况列表.
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function lists()

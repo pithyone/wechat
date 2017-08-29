@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Message;
 
-
 class File extends Attribute
 {
     /**
