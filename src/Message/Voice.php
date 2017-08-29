@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Message;
 
-
 class Voice extends Attribute
 {
     /**

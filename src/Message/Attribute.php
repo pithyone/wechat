@@ -2,11 +2,11 @@
 
 namespace pithyone\wechat\Message;
 
-
 class Attribute implements AttributeInterface
 {
     /**
      * @return array
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function get()
@@ -15,13 +15,14 @@ class Attribute implements AttributeInterface
         $name = $this->getClassName();
 
         return [
-            "msgtype" => $name,
-            "$name"   => $vars
+            'msgtype' => $name,
+            "$name"   => $vars,
         ];
     }
 
     /**
      * @return string
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getClassName()
@@ -47,7 +48,7 @@ class Attribute implements AttributeInterface
                 $this->convertToArray($item);
             }
         } else {
-            $var = is_object($var) ? (array)($var) : $var;
+            $var = is_object($var) ? (array) ($var) : $var;
         }
     }
 }

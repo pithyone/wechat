@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat\Action;
 
-
 class Batch extends Base
 {
     const BATCH_SYNC_USER = '/cgi-bin/batch/syncuser';
@@ -11,7 +10,7 @@ class Batch extends Base
     const BATCH_GET_RESULT = '/cgi-bin/batch/getresult';
 
     /**
-     * 增量更新成员
+     * 增量更新成员.
      *
      * @param array $data
      *
@@ -26,6 +25,7 @@ class Batch extends Base
      * }
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function syncUser($data)
@@ -34,7 +34,7 @@ class Batch extends Base
     }
 
     /**
-     * 全量覆盖成员
+     * 全量覆盖成员.
      *
      * @param array $data
      *
@@ -49,6 +49,7 @@ class Batch extends Base
      * }
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function replaceUser($data)
@@ -57,7 +58,7 @@ class Batch extends Base
     }
 
     /**
-     * 全量覆盖部门
+     * 全量覆盖部门.
      *
      * @param array $data
      *
@@ -72,6 +73,7 @@ class Batch extends Base
      * }
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function replaceParty($data)
@@ -80,11 +82,12 @@ class Batch extends Base
     }
 
     /**
-     * 获取异步任务结果
+     * 获取异步任务结果.
      *
      * @param string $jobid 异步任务id
      *
      * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function result($jobid)

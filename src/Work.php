@@ -2,7 +2,6 @@
 
 namespace pithyone\wechat;
 
-
 use Arrayy\Arrayy;
 use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\FilesystemCache;
@@ -27,7 +26,7 @@ use pithyone\wechat\Exceptions\RuntimeException;
 use pithyone\wechat\Server\Server;
 
 /**
- * Class Application
+ * Class Application.
  *
  * @property \pithyone\wechat\Action\Agent      $agent
  * @property \pithyone\wechat\Action\Batch      $batch
@@ -40,7 +39,6 @@ use pithyone\wechat\Server\Server;
  * @property \pithyone\wechat\Action\Tag        $tag
  * @property \pithyone\wechat\Action\User       $user
  * @property \pithyone\wechat\Server\Server     $server
- *
  */
 class Work
 {
@@ -119,6 +117,7 @@ class Work
 
     /**
      * @return Token
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     private function newToken()
@@ -136,14 +135,16 @@ class Work
     /**
      * @param string $agentId
      *
-     * @return $this
      * @throws RuntimeException
+     *
+     * @return $this
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function setAgentId($agentId)
     {
         if (empty($this->config->get($agentId))) {
-            throw new RuntimeException("No agent is selected.");
+            throw new RuntimeException('No agent is selected.');
         }
 
         $old_agentId = $this->agentId;
@@ -160,8 +161,10 @@ class Work
     /**
      * @param string $name
      *
-     * @return mixed
      * @throws RuntimeException
+     *
+     * @return mixed
+     *
      * @author wangbing <pithyone@vip.qq.com>
      */
     public function __get($name)
