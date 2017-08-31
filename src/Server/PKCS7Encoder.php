@@ -4,8 +4,6 @@ namespace pithyone\wechat\Server;
 
 /**
  * Class PKCS7Encoder.
- *
- * 提供基于PKCS7算法的加解密接口.
  */
 class PKCS7Encoder
 {
@@ -17,8 +15,6 @@ class PKCS7Encoder
      * @param string $text 需要进行填充补位操作的明文
      *
      * @return string 补齐明文字符串
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function encode($text)
     {
@@ -46,12 +42,11 @@ class PKCS7Encoder
      * @param string $text 解密后的明文
      *
      * @return bool|string 删除填充补位后的明文
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function decode($text)
     {
         $pad = ord(substr($text, -1));
+
         if ($pad < 1 || $pad > self::$block_size) {
             $pad = 0;
         }

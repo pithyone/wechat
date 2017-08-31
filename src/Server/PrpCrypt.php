@@ -2,33 +2,47 @@
 
 namespace pithyone\wechat\Server;
 
-use pithyone\wechat\Exceptions\ServerException;
+use pithyone\wechat\Exception\DecryptAESException;
+use pithyone\wechat\Exception\EncryptAESException;
+use pithyone\wechat\Exception\IllegalAesKeyException;
+use pithyone\wechat\Exception\IllegalBufferException;
+use pithyone\wechat\Exception\ValidateCorpidException;
 
+/**
+ * Class PrpCrypt.
+ */
 class PrpCrypt
 {
+    /**
+     * @var bool|string
+     */
     public $key;
 
     /**
      * PrpCrypt constructor.
      *
      * @param $key
+     *
+     * @throws IllegalAesKeyException
      */
     public function __construct($key)
     {
+        if (strlen($key) != 43) {
+            throw new IllegalAesKeyException();
+        }
+
         $this->key = base64_decode($key.'=');
     }
 
     /**
      * 对明文进行加密.
      *
-     * @param string $text   需要加密的明文
+     * @param string $text 需要加密的明文
      * @param string $corpid
      *
-     * @throws ServerException
+     * @throws EncryptAESException
      *
      * @return string 加密后的密文
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function encrypt($text, $corpid)
     {
@@ -53,7 +67,7 @@ class PrpCrypt
 
             return base64_encode($encrypted);
         } catch (\Exception $e) {
-            throw new ServerException('EncryptAESError');
+            throw new EncryptAESException();
         }
     }
 
@@ -63,11 +77,11 @@ class PrpCrypt
      * @param string $encrypted 需要解密的密文
      * @param string $corpid
      *
-     * @throws ServerException
+     * @throws DecryptAESException
+     * @throws IllegalBufferException
+     * @throws ValidateCorpidException
      *
      * @return bool|string 解密得到的明文
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function decrypt($encrypted, $corpid)
     {
@@ -83,7 +97,7 @@ class PrpCrypt
             mcrypt_generic_deinit($module);
             mcrypt_module_close($module);
         } catch (\Exception $e) {
-            throw new ServerException('DecryptAESError');
+            throw new DecryptAESException();
         }
 
         try {
@@ -101,11 +115,11 @@ class PrpCrypt
             $xml_content = substr($content, 4, $xml_len);
             $from_corpid = substr($content, $xml_len + 4);
         } catch (\Exception $e) {
-            throw new ServerException('IllegalBuffer');
+            throw new IllegalBufferException();
         }
 
         if ($from_corpid != $corpid) {
-            throw new ServerException('ValidateCorpidError');
+            throw new ValidateCorpidException();
         }
 
         return $xml_content;
@@ -115,8 +129,6 @@ class PrpCrypt
      * 随机生成16位字符串.
      *
      * @return string
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getRandomStr()
     {

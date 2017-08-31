@@ -3,11 +3,16 @@
 namespace pithyone\wechat\Action;
 
 use Doctrine\Common\Cache\CacheProvider;
-use pithyone\wechat\Core\Http;
-use pithyone\wechat\Exceptions\HttpException;
+use pithyone\wechat\Util\Http;
+use pithyone\wechat\Exception\HttpException;
 
-class Token
+/**
+ * Class Token.
+ */
+class Token extends Base
 {
+    const GET_TOKEN = '/cgi-bin/gettoken';
+
     /**
      * @var string
      */
@@ -19,11 +24,6 @@ class Token
     protected $secret;
 
     /**
-     * @var string
-     */
-    protected $agentId;
-
-    /**
      * @var CacheProvider
      */
     protected $cache;
@@ -33,31 +33,30 @@ class Token
      */
     protected $cacheId;
 
-    const GET_TOKEN = '/cgi-bin/gettoken';
-
     /**
      * Token constructor.
      *
      * @param string        $corpId
      * @param string        $secret
      * @param string        $agentId
+     * @param Http          $http
      * @param CacheProvider $cache
      */
-    public function __construct($corpId, $secret, $agentId, CacheProvider $cache)
+    public function __construct($corpId, $secret, $agentId, Http $http, CacheProvider $cache)
     {
+        parent::__construct($http);
         $this->corpId = $corpId;
         $this->secret = $secret;
-        $this->agentId = $agentId;
         $this->cache = $cache;
-        $this->cacheId = "work_wechat.access_token.{$this->corpId}.{$this->agentId}";
+        $this->cacheId = "work_wechat.access_token.{$this->corpId}.{$agentId}";
     }
 
     /**
-     * @param bool $forceRefresh
+     * 获取access_token
      *
-     * @return false|mixed
+     * @param bool $forceRefresh 是否删除缓存重新获取
      *
-     * @author wangbing <pithyone@vip.qq.com>
+     * @return mixed
      */
     public function get($forceRefresh = false)
     {
@@ -73,16 +72,18 @@ class Token
     }
 
     /**
+     * @link https://work.weixin.qq.com/api/doc#10013
+     *
      * @throws HttpException
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getFromServer()
     {
-        $http = new Http();
-        $response = $http->response('GET', [self::GET_TOKEN, ['corpid' => $this->corpId, 'corpsecret' => $this->secret]]);
+        $response = $this->http->response(
+            'GET',
+            [self::GET_TOKEN, ['corpid' => $this->corpId, 'corpsecret' => $this->secret]]
+        );
 
         if (!isset($response['access_token']) || empty($response['access_token'])) {
             throw new HttpException('get access token error');

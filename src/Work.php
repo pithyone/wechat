@@ -2,15 +2,15 @@
 
 namespace pithyone\wechat;
 
-use Arrayy\Arrayy;
+use Arrayy\Arrayy as A;
 use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\FilesystemCache;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use pithyone\wechat\Action\Agent;
 use pithyone\wechat\Action\Batch;
+use pithyone\wechat\Action\Corp;
 use pithyone\wechat\Action\Department;
 use pithyone\wechat\Action\JSApi;
 use pithyone\wechat\Action\Media;
@@ -20,25 +20,25 @@ use pithyone\wechat\Action\OAuth;
 use pithyone\wechat\Action\Tag;
 use pithyone\wechat\Action\Token;
 use pithyone\wechat\Action\User;
-use pithyone\wechat\Core\Http;
-use pithyone\wechat\Core\Log;
-use pithyone\wechat\Exceptions\RuntimeException;
+use pithyone\wechat\Util\Http;
 use pithyone\wechat\Server\Server;
+use pithyone\wechat\Util\Logger;
 
 /**
  * Class Application.
  *
- * @property \pithyone\wechat\Action\Agent      $agent
- * @property \pithyone\wechat\Action\Batch      $batch
- * @property \pithyone\wechat\Action\Department $department
- * @property \pithyone\wechat\Action\JSApi      $JSApi
- * @property \pithyone\wechat\Action\Media      $media
- * @property \pithyone\wechat\Action\Menu       $menu
- * @property \pithyone\wechat\Action\Message    $message
- * @property \pithyone\wechat\Action\OAuth      $OAuth
- * @property \pithyone\wechat\Action\Tag        $tag
- * @property \pithyone\wechat\Action\User       $user
- * @property \pithyone\wechat\Server\Server     $server
+ * @property Agent      $agent
+ * @property Batch      $batch
+ * @property Corp       $corp
+ * @property Department $department
+ * @property JSApi      $JSApi
+ * @property Media      $media
+ * @property Menu       $menu
+ * @property Message    $message
+ * @property OAuth      $OAuth
+ * @property Tag        $tag
+ * @property User       $user
+ * @property Server     $server
  */
 class Work
 {
@@ -48,11 +48,17 @@ class Work
     public $token;
 
     /**
+     * @var Http
+     */
+    protected $http;
+
+    /**
      * @var array
      */
     protected $classes = [
         'agent'      => Agent::class,
         'batch'      => Batch::class,
+        'corp'       => Corp::class,
         'department' => Department::class,
         'JSApi'      => JSApi::class,
         'media'      => Media::class,
@@ -65,7 +71,7 @@ class Work
     ];
 
     /**
-     * @var Arrayy
+     * @var A
      */
     protected $config;
 
@@ -81,32 +87,36 @@ class Work
      */
     public function __construct($config = [])
     {
-        $this->config = new Arrayy($config);
+        $this->config = A::create($config);
 
         $this->initializeLogger();
         $this->initializeCache();
+
+        $this->http ?: $this->http = $this->config->get('http') ?: new Http();
     }
 
     /**
-     * @author wangbing <pithyone@vip.qq.com>
+     * 初始化日志.
      */
     private function initializeLogger()
     {
-        $logger = new Logger('WorkWeChat');
+        $logger = new \Monolog\Logger('WorkWeChat');
 
         if (!$this->config->get('debug')) {
             $logger->pushHandler(new NullHandler());
-        } elseif ($this->config->get('log.handler') && $this->config->get('log.handler') instanceof AbstractProcessingHandler) {
-            $logger->pushHandler($this->config->get('log.handler'));
-        } elseif ($logFile = $this->config->get('log.file')) {
-            $logger->pushHandler(new StreamHandler($logFile));
+        } elseif ($handler = $this->config->get('logger')) {
+            if ($handler instanceof AbstractProcessingHandler) {
+                $logger->pushHandler($handler);
+            } elseif (is_string($handler)) {
+                $logger->pushHandler(new StreamHandler($handler));
+            }
         }
 
-        Log::setLogger($logger);
+        Logger::setLogger($logger);
     }
 
     /**
-     * @author wangbing <pithyone@vip.qq.com>
+     * 初始化缓存.
      */
     private function initializeCache()
     {
@@ -117,8 +127,6 @@ class Work
 
     /**
      * @return Token
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     private function newToken()
     {
@@ -126,6 +134,7 @@ class Work
             $this->config->get('corp_id'),
             $this->config->get("{$this->agentId}.secret"),
             $this->agentId,
+            $this->http,
             $this->config->get('cache')
         );
 
@@ -133,18 +142,14 @@ class Work
     }
 
     /**
-     * @param string $agentId
-     *
-     * @throws RuntimeException
+     * @param string $agentId 应用ID
      *
      * @return $this
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function setAgentId($agentId)
     {
-        if (empty($this->config->get($agentId))) {
-            throw new RuntimeException('No agent is selected.');
+        if (!$this->config->get($agentId)) {
+            throw new \InvalidArgumentException("'{$agentId}' is not defined.");
         }
 
         $old_agentId = $this->agentId;
@@ -161,34 +166,29 @@ class Work
     /**
      * @param string $name
      *
-     * @throws RuntimeException
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function __get($name)
     {
-        if (isset($this->classes[$name])) {
-            $http = new Http();
-            $http->addQuery(['access_token' => $this->token->get()]);
-            $class = $this->classes[$name];
+        if (!isset($this->classes[$name])) {
+            throw new \InvalidArgumentException("'{$name}' is not defined.");
+        }
 
-            if ($name == 'JSApi') {
-                return new $class($http, $this->config->get('cache'), $this->config->get('corp_id'));
-            } elseif ($name == 'server') {
-                return new $class(
-                    $this->config->get('corp_id'),
-                    $this->config->get("{$this->agentId}.token"),
-                    $this->config->get("{$this->agentId}.aes_key")
-                );
-            } elseif (in_array($name, ['agent', 'message', 'menu'])) {
-                return new $class($http, $this->config->get("{$this->agentId}.agent_id"));
-            } else {
-                return new $class($http);
-            }
+        $this->http->addQuery(['access_token' => $this->token->get()]);
+        $class = $this->classes[$name];
+
+        if (in_array($name, ['agent', 'message', 'menu'])) {
+            return new $class($this->http, $this->config->get("{$this->agentId}.agent_id"));
+        } elseif ($name == 'JSApi') {
+            return new $class($this->http, $this->config->get('cache'), $this->config->get('corp_id'));
+        } elseif ($name == 'server') {
+            return new $class(
+                $this->config->get('corp_id'),
+                $this->config->get("{$this->agentId}.token"),
+                $this->config->get("{$this->agentId}.aes_key")
+            );
         } else {
-            throw new RuntimeException("Identifier '{$name}' is not defined.");
+            return new $class($this->http);
         }
     }
 }

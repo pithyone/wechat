@@ -2,6 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
+/**
+ * Class Tag.
+ */
 class Tag extends Base
 {
     const TAG_CREATE = '/cgi-bin/tag/create';
@@ -15,18 +18,13 @@ class Tag extends Base
     /**
      * 创建标签.
      *
+     * @link https://work.weixin.qq.com/api/doc#10915
+     *
      * @param array $data
      *
-     * {
-     * "tagname": "UI",
-     * "tagid": 12
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function create($data)
+    public function create(array $data)
     {
         return $this->http->response('JSON', [self::TAG_CREATE, $data]);
     }
@@ -34,18 +32,13 @@ class Tag extends Base
     /**
      * 更新标签.
      *
+     * @link https://work.weixin.qq.com/api/doc#10919
+     *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "tagname": "UI design"
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function update($data)
+    public function update(array $data)
     {
         return $this->http->response('JSON', [self::TAG_UPDATE, $data]);
     }
@@ -53,47 +46,41 @@ class Tag extends Base
     /**
      * 删除标签.
      *
-     * @param int $tagid 标签ID
+     * @link https://work.weixin.qq.com/api/doc#10920
+     *
+     * @param int $tagId 标签ID
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function delete($tagid)
+    public function delete($tagId)
     {
-        return $this->http->response('GET', [self::TAG_DELETE, ['tagid' => $tagid]]);
+        return $this->http->response('GET', [self::TAG_DELETE, ['tagid' => $tagId]]);
     }
 
     /**
      * 获取标签成员.
      *
-     * @param int $tagid 标签ID
+     * @link https://work.weixin.qq.com/api/doc#10921
+     *
+     * @param int $tagId 标签ID
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function get($tagid)
+    public function get($tagId)
     {
-        return $this->http->response('GET', [self::TAG_GET, ['tagid' => $tagid]]);
+        return $this->http->response('GET', [self::TAG_GET, ['tagid' => $tagId]]);
     }
 
     /**
      * 增加标签成员.
      *
+     * @link https://work.weixin.qq.com/api/doc#10923
+     *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "userlist":[ "user1","user2"],
-     * "partylist": [4]
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function addUsers($data)
+    public function addUsers(array $data)
     {
         return $this->http->response('JSON', [self::TAG_ADD_USER, $data]);
     }
@@ -101,19 +88,13 @@ class Tag extends Base
     /**
      * 删除标签成员.
      *
+     * @link https://work.weixin.qq.com/api/doc#10925
+     *
      * @param array $data
      *
-     * {
-     * "tagid": 12,
-     * "userlist":[ "user1","user2"],
-     * "partylist":[2,4]
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function delUsers($data)
+    public function delUsers(array $data)
     {
         return $this->http->response('JSON', [self::TAG_DEL_USER, $data]);
     }
@@ -121,9 +102,9 @@ class Tag extends Base
     /**
      * 获取标签列表.
      *
-     * @return mixed
+     * @link https://work.weixin.qq.com/api/doc#10926
      *
-     * @author wangbing <pithyone@vip.qq.com>
+     * @return mixed
      */
     public function lists()
     {

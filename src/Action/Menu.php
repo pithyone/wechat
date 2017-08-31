@@ -2,8 +2,11 @@
 
 namespace pithyone\wechat\Action;
 
-use pithyone\wechat\Core\Http;
+use pithyone\wechat\Util\Http;
 
+/**
+ * Class Menu.
+ */
 class Menu extends Base
 {
     const MENU_CREATE = '/cgi-bin/menu/create';
@@ -14,23 +17,22 @@ class Menu extends Base
      * Menu constructor.
      *
      * @param Http   $http
-     * @param string $agentId 企业应用的id
+     * @param string $agentId 应用id
      */
     public function __construct(Http $http, $agentId)
     {
         parent::__construct($http);
-
         $http->addQuery(['agentid' => $agentId]);
     }
 
     /**
-     * 创建应用菜单.
+     * 创建菜单.
+     *
+     * @link https://work.weixin.qq.com/api/doc#10786
      *
      * @param array $data
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function create(array $data)
     {
@@ -38,11 +40,11 @@ class Menu extends Base
     }
 
     /**
-     * 获取菜单列表.
+     * 获取菜单.
+     *
+     * @link https://work.weixin.qq.com/api/doc#10787
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function get()
     {
@@ -50,11 +52,11 @@ class Menu extends Base
     }
 
     /**
-     * 删除应用菜单.
+     * 删除菜单.
+     *
+     * @link https://work.weixin.qq.com/api/doc#10788
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function delete()
     {

@@ -3,11 +3,18 @@
 namespace pithyone\wechat\Action;
 
 use Doctrine\Common\Cache\CacheProvider;
-use pithyone\wechat\Core\Http;
-use pithyone\wechat\Exceptions\HttpException;
+use pithyone\wechat\Util\Http;
+use pithyone\wechat\Exception\HttpException;
 
+/**
+ * Class JSApi.
+ *
+ * @link https://work.weixin.qq.com/api/doc#10029
+ */
 class JSApi extends Base
 {
+    const GET_TICKET = '/cgi-bin/get_jsapi_ticket';
+
     /**
      * @var CacheProvider
      */
@@ -17,8 +24,6 @@ class JSApi extends Base
      * @var string
      */
     protected $corpId;
-
-    const GET_TICKET = '/cgi-bin/get_jsapi_ticket';
 
     /**
      * JSApi constructor.
@@ -39,8 +44,6 @@ class JSApi extends Base
      * 获取企业微信JS接口临时票据.
      *
      * @return mixed 临时票据字符串
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getTicket()
     {
@@ -61,8 +64,6 @@ class JSApi extends Base
      * 获取企业微信JS接口临时票据.
      *
      * @return array 临时票据字符串和过期时间数组
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function getTicketArray()
     {
@@ -85,8 +86,6 @@ class JSApi extends Base
      * @throws HttpException
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     protected function getTicketFromServer()
     {
@@ -100,9 +99,9 @@ class JSApi extends Base
     }
 
     /**
-     * @return array
+     * JS-SDK 配置
      *
-     * @author wangbing <pithyone@vip.qq.com>
+     * @return array
      */
     public function sign()
     {
@@ -110,8 +109,12 @@ class JSApi extends Base
 
         $timestamp = time();
 
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        if (defined('PHPUNIT_RUNNING') || php_sapi_name() === 'cli') {
+            $url = '';
+        } else {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
+            $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        }
 
         $ticket = $this->getTicket();
         $rawString = "jsapi_ticket={$ticket}&noncestr={$nonceStr}&timestamp={$timestamp}&url={$url}";

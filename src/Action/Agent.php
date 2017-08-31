@@ -2,8 +2,11 @@
 
 namespace pithyone\wechat\Action;
 
-use pithyone\wechat\Core\Http;
+use pithyone\wechat\Util\Http;
 
+/**
+ * Class Agent.
+ */
 class Agent extends Base
 {
     const AGENT_GET = '/cgi-bin/agent/get';
@@ -11,7 +14,7 @@ class Agent extends Base
     const AGENT_LIST = '/cgi-bin/agent/list';
 
     /**
-     * @var string 授权方应用id
+     * @var string
      */
     protected $agentId;
 
@@ -19,21 +22,20 @@ class Agent extends Base
      * Agent constructor.
      *
      * @param Http   $http
-     * @param string $agentId 授权方应用id
+     * @param string $agentId 应用id
      */
     public function __construct(Http $http, $agentId)
     {
         parent::__construct($http);
-
         $this->agentId = $agentId;
     }
 
     /**
      * 获取应用.
      *
-     * @return mixed
+     * @link https://work.weixin.qq.com/api/doc#10087
      *
-     * @author wangbing <pithyone@vip.qq.com>
+     * @return mixed
      */
     public function get()
     {
@@ -43,21 +45,11 @@ class Agent extends Base
     /**
      * 设置应用.
      *
+     * @link https://work.weixin.qq.com/api/doc#10088
+     *
      * @param array $data
      *
-     * {
-     * "report_location_flag": 0,
-     * "logo_mediaid": "xxxxx",
-     * "name": "NAME",
-     * "description": "DESC",
-     * "redirect_domain": "xxxxxx",
-     * "isreportenter":0,
-     * "home_url":"http://www.qq.com"
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function set(array $data)
     {
@@ -69,9 +61,9 @@ class Agent extends Base
     /**
      * 获取应用概况列表.
      *
-     * @return mixed
+     * @link https://work.weixin.qq.com/api/doc#11214
      *
-     * @author wangbing <pithyone@vip.qq.com>
+     * @return mixed
      */
     public function lists()
     {

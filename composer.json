@@ -16,9 +16,19 @@
         "monolog/monolog": "^1.23",
         "voku/arrayy": "^3.6"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0",
+        "mockery/mockery": "dev-master"
+    },
     "autoload": {
+        "files": ["src/functions.php"],
         "psr-4": {
             "pithyone\\wechat\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "pithyone\\wechat\\tests\\": "tests/"
         }
     }
 }

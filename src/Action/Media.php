@@ -2,6 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
+/**
+ * Class Media.
+ */
 class Media extends Base
 {
     const MEDIA_UPLOAD = '/cgi-bin/media/upload';
@@ -10,12 +13,12 @@ class Media extends Base
     /**
      * 上传临时素材文件.
      *
+     * @link https://work.weixin.qq.com/api/doc#10112
+     *
      * @param string $type 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件(file)
      * @param string $path 文件位置，绝对路径
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function upload($type, $path)
     {
@@ -27,14 +30,14 @@ class Media extends Base
     /**
      * 获取临时素材文件.
      *
-     * @param string $media_id 媒体文件id
+     * @link https://work.weixin.qq.com/api/doc#10115
+     *
+     * @param string $mediaId 媒体文件id
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function get($media_id)
+    public function get($mediaId)
     {
-        return $this->http->response('GET', [self::MEDIA_GET, ['media_id' => $media_id]]);
+        return $this->http->response('GET', [self::MEDIA_GET, ['media_id' => $mediaId]]);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace pithyone\wechat\Action;
 
+/**
+ * Class Department.
+ */
 class Department extends Base
 {
     const DEPARTMENT_CREATE = '/cgi-bin/department/create';
@@ -12,20 +15,13 @@ class Department extends Base
     /**
      * 创建部门.
      *
+     * @link https://work.weixin.qq.com/api/doc#10076
+     *
      * @param array $data
      *
-     * {
-     * "name": "广州研发中心",
-     * "parentid": 1,
-     * "order": 1,
-     * "id": 2
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function create($data)
+    public function create(array $data)
     {
         return $this->http->response('JSON', [self::DEPARTMENT_CREATE, $data]);
     }
@@ -33,20 +29,13 @@ class Department extends Base
     /**
      * 更新部门.
      *
+     * @link https://work.weixin.qq.com/api/doc#10077
+     *
      * @param array $data
      *
-     * {
-     * "id": 2,
-     * "name": "广州研发中心",
-     * "parentid": 1,
-     * "order": 1
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function update($data)
+    public function update(array $data)
     {
         return $this->http->response('JSON', [self::DEPARTMENT_UPDATE, $data]);
     }
@@ -54,11 +43,11 @@ class Department extends Base
     /**
      * 删除部门.
      *
+     * @link https://work.weixin.qq.com/api/doc#10079
+     *
      * @param int $id 部门id。（注：不能删除根部门；不能删除含有子部门、成员的部门）
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function delete($id)
     {
@@ -68,11 +57,11 @@ class Department extends Base
     /**
      * 获取部门列表.
      *
+     * @link https://work.weixin.qq.com/api/doc#10093
+     *
      * @param int $id 部门id。获取指定部门及其下的子部门。 如果不填，默认获取全量组织架构
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
     public function lists($id = null)
     {

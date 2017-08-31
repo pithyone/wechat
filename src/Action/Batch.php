@@ -2,6 +2,11 @@
 
 namespace pithyone\wechat\Action;
 
+/**
+ * Class Batch.
+ *
+ * @link https://work.weixin.qq.com/api/doc#10138
+ */
 class Batch extends Base
 {
     const BATCH_SYNC_USER = '/cgi-bin/batch/syncuser';
@@ -14,21 +19,9 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function syncUser($data)
+    public function syncUser(array $data)
     {
         return $this->http->response('JSON', [self::BATCH_SYNC_USER, $data]);
     }
@@ -38,21 +31,9 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function replaceUser($data)
+    public function replaceUser(array $data)
     {
         return $this->http->response('JSON', [self::BATCH_REPLACE_USER, $data]);
     }
@@ -62,21 +43,9 @@ class Batch extends Base
      *
      * @param array $data
      *
-     * {
-     * "media_id":"xxxxxx",
-     * "callback":
-     * {
-     * "url": "xxx",
-     * "token": "xxx",
-     * "encodingaeskey": "xxx"
-     * }
-     * }
-     *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function replaceParty($data)
+    public function replaceParty(array $data)
     {
         return $this->http->response('JSON', [self::BATCH_REPLACE_PARTY, $data]);
     }
@@ -84,14 +53,12 @@ class Batch extends Base
     /**
      * 获取异步任务结果.
      *
-     * @param string $jobid 异步任务id
+     * @param string $jobId 异步任务id
      *
      * @return mixed
-     *
-     * @author wangbing <pithyone@vip.qq.com>
      */
-    public function result($jobid)
+    public function result($jobId)
     {
-        return $this->http->response('GET', [self::BATCH_GET_RESULT, ['jobid' => $jobid]]);
+        return $this->http->response('GET', [self::BATCH_GET_RESULT, ['jobid' => $jobId]]);
     }
 }

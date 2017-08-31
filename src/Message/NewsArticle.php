@@ -2,30 +2,131 @@
 
 namespace pithyone\wechat\Message;
 
+/**
+ * Class NewsArticle.
+ */
 class NewsArticle
 {
     /**
-     * @var string 标题，不超过128个字节，超过会自动截断
+     * @var string 标题
      */
-    public $title;
+    private $title;
 
     /**
-     * @var string 描述，不超过512个字节，超过会自动截断
+     * @var string 描述
      */
-    public $description = '';
+    private $description;
 
     /**
      * @var string 点击后跳转的链接
      */
-    public $url = '';
+    private $url;
 
     /**
-     * @var string 图文消息的图片链接，支持JPG、PNG格式，较好的效果为大图640320，小图8080
+     * @var string 图文消息的图片链接
      */
-    public $picurl = '';
+    private $picUrl;
 
     /**
-     * @var string 按钮文字，仅在图文数为1条时才生效。 默认为“阅读全文”， 不超过4个文字，超过自动截断。
+     * NewsArticle constructor.
+     *
+     * @param string $title
+     * @param string $url
+     * @param string $description
+     * @param string $picUrl
+     * @param string $btnTxt
      */
-    public $btntxt = '阅读全文';
+    public function __construct($title, $url, $description = '', $picUrl = '', $btnTxt = '阅读全文')
+    {
+        $this->title = $title;
+        $this->url = $url;
+        $this->description = $description;
+        $this->picUrl = $picUrl;
+        $this->btnTxt = $btnTxt;
+    }
+
+    /**
+     * @var string 按钮文字，仅在图文数为1条时才生效。该设置只在企业微信上生效，微信插件上不生效
+     */
+    private $btnTxt;
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicUrl()
+    {
+        return $this->picUrl;
+    }
+
+    /**
+     * @param string $picUrl
+     */
+    public function setPicUrl($picUrl)
+    {
+        $this->picUrl = $picUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBtnTxt()
+    {
+        return $this->btnTxt;
+    }
+
+    /**
+     * @param string $btnTxt
+     */
+    public function setBtnTxt($btnTxt)
+    {
+        $this->btnTxt = $btnTxt;
+    }
 }
