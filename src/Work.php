@@ -157,7 +157,7 @@ class Work
 
         // 如果重新设置应用ID，相应的，Token也要重新设置
         if ($old_agentId != $agentId || !$this->token) {
-            $this->token = $this->newToken();
+            $this->token = $this->config->get('token') ?: $this->newToken();
         }
 
         return $this;

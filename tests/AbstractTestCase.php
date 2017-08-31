@@ -8,6 +8,7 @@
 
 namespace pithyone\wechat\tests;
 
+use Doctrine\Common\Cache\FilesystemCache;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use pithyone\wechat\Work;
@@ -60,6 +61,12 @@ abstract class AbstractTestCase extends TestCase
         $http->shouldReceive('getFileContents')->andReturn('abc');
 
         $this->config['http'] = $http;
+
+        $token = \Mockery::mock('pithyone\wechat\Action\Token[get]',
+            ['', '', '', $http, new FilesystemCache(sys_get_temp_dir())]);
+        $token->shouldReceive('get')->andReturn(self::ACCESS_TOKEN);
+        $this->config['token'] = $token;
+
         $work = new Work($this->config);
 
         return $work->setAgentId('test');
