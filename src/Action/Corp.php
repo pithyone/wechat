@@ -17,7 +17,7 @@ class Corp extends Base
     const CORP_GET_APPROVAL_DATA = '/cgi-bin/corp/getapprovaldata';
 
     /**
-     * 获取打卡数据
+     * 获取打卡数据.
      *
      * @link https://work.weixin.qq.com/api/doc#11196
      *
@@ -31,7 +31,7 @@ class Corp extends Base
     }
 
     /**
-     * 获取审批数据
+     * 获取审批数据.
      *
      * @link https://work.weixin.qq.com/api/doc#11228
      *

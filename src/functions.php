@@ -5,7 +5,6 @@
  * @author  wangbing <pithyone@vip.qq.com>
  * @date    2017/8/30
  */
-
 use pithyone\wechat\Message\MPNewsArticle;
 use pithyone\wechat\Message\NewsArticle;
 

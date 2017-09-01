@@ -35,16 +35,16 @@ class XMLParse
     /**
      * 生成xml消息.
      *
-     * @param string $encrypt 加密后的消息密文
+     * @param string $encrypt   加密后的消息密文
      * @param string $signature 安全签名
      * @param string $timestamp 时间戳
-     * @param string $nonce 随机字符串
+     * @param string $nonce     随机字符串
      *
      * @return string
      */
     public function generate($encrypt, $signature, $timestamp, $nonce)
     {
-        $format = <<<XML
+        $format = <<<'XML'
 <xml>
    <Encrypt><![CDATA[%s]]></Encrypt>
    <MsgSignature><![CDATA[%s]]></MsgSignature>

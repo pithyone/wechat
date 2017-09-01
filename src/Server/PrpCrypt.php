@@ -37,7 +37,7 @@ class PrpCrypt
     /**
      * 对明文进行加密.
      *
-     * @param string $text 需要加密的明文
+     * @param string $text   需要加密的明文
      * @param string $corpid
      *
      * @throws EncryptAESException

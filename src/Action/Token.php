@@ -3,8 +3,8 @@
 namespace pithyone\wechat\Action;
 
 use Doctrine\Common\Cache\CacheProvider;
-use pithyone\wechat\Util\Http;
 use pithyone\wechat\Exception\HttpException;
+use pithyone\wechat\Util\Http;
 
 /**
  * Class Token.
@@ -52,7 +52,7 @@ class Token extends Base
     }
 
     /**
-     * 获取access_token
+     * 获取access_token.
      *
      * @param bool $forceRefresh 是否删除缓存重新获取
      *

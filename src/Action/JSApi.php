@@ -3,8 +3,8 @@
 namespace pithyone\wechat\Action;
 
 use Doctrine\Common\Cache\CacheProvider;
-use pithyone\wechat\Util\Http;
 use pithyone\wechat\Exception\HttpException;
+use pithyone\wechat\Util\Http;
 
 /**
  * Class JSApi.
@@ -99,7 +99,7 @@ class JSApi extends Base
     }
 
     /**
-     * JS-SDK 配置
+     * JS-SDK 配置.
      *
      * @return array
      */

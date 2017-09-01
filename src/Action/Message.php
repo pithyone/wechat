@@ -47,7 +47,7 @@ class Message extends Base
     }
 
     /**
-     * 文本消息
+     * 文本消息.
      *
      * @param string $content 内容
      *
@@ -61,9 +61,9 @@ class Message extends Base
     }
 
     /**
-     * 图片、语音、文件消息
+     * 图片、语音、文件消息.
      *
-     * @param string $type image、voice、file
+     * @param string $type    image、voice、file
      * @param string $mediaId 媒体文件id
      *
      * @return $this
@@ -76,10 +76,10 @@ class Message extends Base
     }
 
     /**
-     * 视频消息
+     * 视频消息.
      *
-     * @param string $mediaId 媒体文件id
-     * @param string $title 标题
+     * @param string $mediaId     媒体文件id
+     * @param string $title       标题
      * @param string $description 描述
      *
      * @return $this
@@ -99,9 +99,9 @@ class Message extends Base
     }
 
     /**
-     * 图文消息
+     * 图文消息.
      *
-     * @param string                          $type news、mpnews
+     * @param string                          $type     news、mpnews
      * @param NewsArticle|MPNewsArticle|array $articles
      *
      * @return $this
@@ -122,12 +122,12 @@ class Message extends Base
     }
 
     /**
-     * 文本卡片消息
+     * 文本卡片消息.
      *
-     * @param string $title 标题
+     * @param string $title       标题
      * @param string $description 描述
-     * @param string $url 点击后跳转的链接
-     * @param string $btnTxt 按钮文字
+     * @param string $url         点击后跳转的链接
+     * @param string $btnTxt      按钮文字
      *
      * @return $this
      */
