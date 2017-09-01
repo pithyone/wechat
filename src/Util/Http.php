@@ -75,7 +75,7 @@ class Http
      * @param string $uri
      * @param array  $query
      *
-     * @return mixed|ResponseInterface
+     * @return ResponseInterface
      */
     public function get($uri, array $query = [])
     {
@@ -88,7 +88,7 @@ class Http
      * @param string $uri
      * @param array  $json
      *
-     * @return mixed|ResponseInterface
+     * @return ResponseInterface
      */
     public function json($uri, array $json = [])
     {
@@ -99,7 +99,7 @@ class Http
      * @param string $uri
      * @param array  $list
      *
-     * @return mixed|ResponseInterface
+     * @return ResponseInterface
      */
     public function upload($uri, array $list)
     {
@@ -156,7 +156,7 @@ class Http
      * @param string $method
      * @param array  $options
      *
-     * @return mixed|ResponseInterface
+     * @return ResponseInterface
      */
     public function request($uri, $method = 'GET', $options = [])
     {
