@@ -1,8 +1,8 @@
-# 自定义缓存
+## 自定义缓存
 
-如果你需要集成其他框架的缓存操作，可以自己建立一个类来完成缓存操作，前提这个类得继承：[Doctrine\Common\Cache\CacheProvider](https://github.com/doctrine/cache/blob/master/lib/Doctrine/Common/Cache/CacheProvider.php)
+如果你需要集成其他框架的缓存操作，可以自己建立一个类并继承 [`Doctrine\Common\Cache\CacheProvider`](https://github.com/doctrine/cache/blob/master/lib/Doctrine/Common/Cache/CacheProvider.php) 来完成缓存操作
 
-## 示例
+### 示例
 
 ```php
 <?php
@@ -86,7 +86,7 @@ class MyCache extends CacheProvider
 }
 ```
 
-## 使用
+### 用法
 
 ```php
 $myCache = new MyCache();

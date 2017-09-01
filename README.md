@@ -10,11 +10,16 @@
 
 :package: 最最最简单易用的[企业微信](https://work.weixin.qq.com/)SDK
 
-## Description
+## Introduction
 
-虽然企业微信**很坑**，但是大厂的东西还是要去适配，所以有了这么个东西。
+虽然企业微信**很坑**，但是大厂的东西还是要去适配，所以有了这么个东西
 
-> 暂不支持企业支付相关接口，已列入后续开发计划
+> 暂不支持[企业支付](https://work.weixin.qq.com/api/doc#11478)、[电子发票](https://work.weixin.qq.com/api/doc#11630)、[第三方开放接口](https://work.weixin.qq.com/api/doc#10968)，已列入后续开发计划 :bookmark:
+
+## Requirement
+
+- PHP >= 5.6
+- OpenSSL PHP Extension
 
 ## Installation
 
@@ -22,28 +27,63 @@
 composer require pithyone/wechat
 ```
 
+## Notice
+
+> 每个应用有独立的secret，所以每个应用的access_token应该分开来获取
+
+企业微信 `API` 请求以应用作为基础，每个应用相互独立，所以初始化 [`Work`](/src/Work.php) 后需要 `setAgentId` 设置操作的应用
+
 ## Usage
 
-> 可直接参考 [demo](examples)
+```php
+<?php
 
-- [概述](docs/01-overview.md)
-- [AccessToken](docs/02-token.md)
-- [成员管理](docs/02-user.md)
-- [部门管理](docs/03-department.md)
-- [标签管理](docs/04-tag.md)
-- [应用管理](docs/05-agent.md)
-- [发送消息](docs/06-message.md)
-- [接收消息](docs/07-receive.md)
-- [被动回复消息](docs/08-reply.md)
-- [JS-API](docs/09-js-api.md)
-- [网页授权](docs/10-oauth.md)
-- [自定义菜单](docs/11-menu.md)
-- [素材管理](docs/12-media.md)
+use pithyone\wechat\Work;
+
+$config = [
+    'debug'    => true, // 调试模式，用于记录请求日志
+    'logger'   => __DIR__.'/../tmp/work-wechat.log', // 日志文件位置
+    'corp_id'  => 'your-corp-id', // 企业CorpID
+    'contacts' => [ // 通讯录同步应用配置
+        'token'   => 'your-contacts-agent-token',
+        'aes_key' => 'your-contacts-agent-aes-key',
+        'secret'  => 'your-contacts-agent-secret',
+    ],
+    'test'     => [ // 你的自建应用
+        'agent_id' => 'your-test-agent-id', // 应用ID
+        'token'    => 'your-test-agent-token', // 用于生成签名
+        'aes_key'  => 'your-test-agent-aes-key', // AES密钥
+        'secret'   => 'your-test-agent-secret', // 应用密钥
+    ],
+    // 更多自建应用或者第三方应用，配置格式参照 test 应用
+];
+
+$work = new Work($config);
+
+// 选中通讯录同步应用
+$contacts = $work->setAgentId('contacts');
+$token = $contacts->token;
+echo $token->get();
+
+// 选中你的自建应用
+$test = $work->setAgentId('test');
+$token = $test->token;
+echo $token->get();
+```
+更多详细用法请参考[示例](examples/index.md)
+
+## Documentation
+
+- [企业微信官方开发文档](https://work.weixin.qq.com/api/doc)
 
 ## Advanced
 
-- [缓存](docs/100001-custom-cache.md)
-- [日志](docs/100002-custom-log.md)
+- [自定义缓存](docs/custom-cache.md)
+- [自定义日志](docs/custom-log.md)
+
+## Integration
+
+- [企业微信SDK for ThinkPHP5](https://github.com/pithyone/think-wechat)
 
 ## Thanks
 

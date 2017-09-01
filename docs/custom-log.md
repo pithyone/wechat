@@ -1,8 +1,8 @@
-# 自定义日志
+## 自定义日志
 
-如果你需要集成其他框架的日志操作，可以自己建立一个类来完成日志写入，前提这个类得继承：[Monolog\Handler\AbstractProcessingHandler](https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/AbstractProcessingHandler.php)
+如果你需要集成其他框架的日志操作，可以自己建立一个类并继承 [`Monolog\Handler\AbstractProcessingHandler`](https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/AbstractProcessingHandler.php) 来完成日志写入
 
-## 示例
+### 示例
 
 ```php
 <?php
@@ -26,7 +26,7 @@ class MyLogger extends AbstractProcessingHandler
 }
 ```
 
-## 使用
+### 用法
 
 ```php
 $myLogger = new MyLogger();
@@ -34,9 +34,7 @@ $myLogger = new MyLogger();
 $config = [
     //...
 
-    'log' => [
-        'handler' => $myLogger
-    ],
+    'logger' => $myLogger,
 ];
 
 $work = new Work($config);

@@ -1,39 +1,23 @@
 <?php
-
-require __DIR__.'/../vendor/autoload.php';
-
-use pithyone\wechat\Work;
-
-spl_autoload_register(function ($c) {
-    @include_once strtr($c, '\\_', '//').'.php';
-});
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__DIR__).'/src');
-
-$config = [
-    'debug'    => true,
-    'log'      => [
-        'file' => __DIR__.'/../tmp/work-wechat.log',
-    ],
-    'corp_id'  => 'your-corp-id',
-    'contacts' => [
-        'token'   => 'your-contacts-agent-token',
-        'aes_key' => 'your-contacts-agent-aes-key',
-        'secret'  => 'your-contacts-agent-secret',
-    ],
-    'test'     => [
-        'agent_id' => 'your-test-agent-id',
-        'token'    => 'your-test-agent-token',
-        'aes_key'  => 'your-test-agent-aes-key',
-        'secret'   => 'your-test-agent-secret',
-    ],
-];
-
-$work = new Work($config);
+/**
+ * token.php.
+ *
+ * @author  wangbing <pithyone@vip.qq.com>
+ * @date    2017/9/1
+ */
+require 'bootstrap.php';
 
 $test = $work->setAgentId('test');
 $token = $test->token;
-$token->get();
+
+// 获取 test 应用 access_token
+//var_dump($token->get());
+
+// 强制刷新并获取access_token
+//var_dump($token->get(true));
 
 $contacts = $work->setAgentId('contacts');
 $token = $contacts->token;
-$token->get();
+
+// 获取 contacts 应用 access_token
+//var_dump($token->get());
