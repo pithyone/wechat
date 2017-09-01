@@ -63,7 +63,7 @@ class Http
                     $request->getUri(),
                     $retries + 1,
                     self::MAX_RETRIES,
-                    $response ? 'status code: '.$response->getStatusCode() : $exception->getMessage()
+                    $response ? 'status code: '.$response->getStatusCode() : ($exception ? $exception->getMessage() : '')
                 ), [$request->getHeader('Host')[0]]);
 
                 return true;
