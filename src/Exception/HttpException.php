@@ -7,5 +7,4 @@ namespace pithyone\wechat\Exception;
  */
 class HttpException extends \Exception
 {
-
 }

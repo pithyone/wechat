@@ -126,8 +126,9 @@ class Http
      * @param string $method
      * @param array  $param
      *
-     * @return mixed|\Psr\Http\Message\StreamInterface
      * @throws HttpException
+     *
+     * @return mixed|\Psr\Http\Message\StreamInterface
      */
     public function response($method, $param = [])
     {

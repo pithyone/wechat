@@ -94,7 +94,7 @@ class User extends Base
      * @link https://work.weixin.qq.com/api/doc#10061
      *
      * @param int $departmentId 获取的部门id
-     * @param int $fetchChild 1/0：是否递归获取子部门下面的成员
+     * @param int $fetchChild   1/0：是否递归获取子部门下面的成员
      *
      * @return mixed
      */
@@ -112,7 +112,7 @@ class User extends Base
      * @link https://work.weixin.qq.com/api/doc#10063
      *
      * @param int $departmentId 获取的部门id
-     * @param int $fetchChild 1/0：是否递归获取子部门下面的成员
+     * @param int $fetchChild   1/0：是否递归获取子部门下面的成员
      *
      * @return mixed
      */
@@ -129,7 +129,7 @@ class User extends Base
      *
      * @link https://work.weixin.qq.com/api/doc#11279
      *
-     * @param string $userId 企业内的成员id
+     * @param string $userId  企业内的成员id
      * @param int    $agentId 整型，需要发送红包的应用ID，若只是使用微信支付和企业转账，则无需该参数
      *
      * @return mixed

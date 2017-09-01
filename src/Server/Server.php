@@ -55,8 +55,8 @@ class Server
     /**
      * Server constructor.
      *
-     * @param string $corpId 企业的 CorpId
-     * @param string $token 企业微信后台，开发者设置的token
+     * @param string $corpId         企业的 CorpId
+     * @param string $token          企业微信后台，开发者设置的token
      * @param string $encodingAesKey 企业微信后台，开发者设置的EncodingAESKey
      * @param string $message
      *
@@ -78,7 +78,7 @@ class Server
     }
 
     /**
-     * 被动回复消息
+     * 被动回复消息.
      *
      * @return bool|string
      */
@@ -101,7 +101,7 @@ class Server
     }
 
     /**
-     * 生成 XML 前整理数组
+     * 生成 XML 前整理数组.
      *
      * @param array $array
      */
@@ -119,7 +119,7 @@ class Server
     }
 
     /**
-     * 文本消息
+     * 文本消息.
      *
      * @param string $content 内容
      *
@@ -136,9 +136,9 @@ class Server
     }
 
     /**
-     * 图片、语音消息
+     * 图片、语音消息.
      *
-     * @param string $type image、voice
+     * @param string $type    image、voice
      * @param string $mediaId 媒体文件id
      *
      * @return $this
@@ -151,10 +151,10 @@ class Server
     }
 
     /**
-     * 视频消息
+     * 视频消息.
      *
-     * @param string $mediaId 媒体文件id
-     * @param string $title 标题
+     * @param string $mediaId     媒体文件id
+     * @param string $title       标题
      * @param string $description 描述
      *
      * @return $this
@@ -174,7 +174,7 @@ class Server
     }
 
     /**
-     * 图文消息
+     * 图文消息.
      *
      * @param array|NewsArticle $articles
      *
@@ -216,8 +216,9 @@ class Server
      *
      * @param string $message
      *
-     * @return bool|string
      * @throws ValidateSignatureException
+     *
+     * @return bool|string
      */
     protected function decrypt($message = '')
     {

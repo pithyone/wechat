@@ -36,7 +36,7 @@ class OAuthTest extends AbstractTestCase
         $body = '{"errcode":0,"errmsg":"","userid":"lisi","name":"李四","department":[3],"position":"后台工程师","mobile":"15050495892","gender":1,"email":"xxx@xx.com","avatar":"http://shp.qpic.cn/bizmp/xxxxxxxxxxx/0"}';
         $work = $this->getWork($body);
 
-        $userTicket = "USER_TICKET";
+        $userTicket = 'USER_TICKET';
         $res = $work->OAuth->getUserDetail($userTicket);
 
         $this->assertEquals('POST', $res['method']);

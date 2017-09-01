@@ -20,8 +20,8 @@ use pithyone\wechat\Action\OAuth;
 use pithyone\wechat\Action\Tag;
 use pithyone\wechat\Action\Token;
 use pithyone\wechat\Action\User;
-use pithyone\wechat\Util\Http;
 use pithyone\wechat\Server\Server;
+use pithyone\wechat\Util\Http;
 use pithyone\wechat\Util\Logger;
 
 /**
