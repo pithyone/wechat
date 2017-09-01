@@ -17,7 +17,7 @@
         "voku/arrayy": "^3.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.0",
+        "phpunit/phpunit": "^5.0",
         "mockery/mockery": "^0.9.9"
     },
     "autoload": {
