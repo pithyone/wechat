@@ -1,23 +1,16 @@
 <?php
-/**
- * token.php.
- *
- * @author  wangbing <pithyone@vip.qq.com>
- * @date    2017/9/1
- */
-require 'bootstrap.php';
 
-$test = $work->setAgentId('test');
-$token = $test->token;
+$app = require __DIR__ . '/app.php';
 
-// 获取 test 应用 access_token
-//var_dump($token->get());
+/** @var \WeWork\ApiCache\Token $token */
+$token = $app->get('token');
 
-// 强制刷新并获取access_token
-//var_dump($token->get(true));
+try {
+    $token->get();
+} catch (\Psr\SimpleCache\InvalidArgumentException $e) {
+}
 
-$contacts = $work->setAgentId('contacts');
-$token = $contacts->token;
-
-// 获取 contacts 应用 access_token
-//var_dump($token->get());
+try {
+    $token->get(true);
+} catch (\Psr\SimpleCache\InvalidArgumentException $e) {
+}

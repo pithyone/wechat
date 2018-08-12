@@ -1,20 +1,28 @@
 <?php
-/**
- * media.php.
- *
- * @author  wangbing <pithyone@vip.qq.com>
- * @date    2017/9/1
- */
-require 'bootstrap.php';
 
-$test = $work->setAgentId('test');
-$media = $test->media;
+$app = require __DIR__ . '/app.php';
 
-// 上传临时素材文件
-//var_dump($media->upload('image', '/path/to/file'));
+/** @var \WeWork\Api\Media $media */
+$media = $app->get('media');
 
-// 获取临时素材文件
-//var_dump(file_put_contents(
-//    __DIR__.'/../tmp/image.png',
-//    $media->get('3J7g_v-QEILvXEEzkN-1CK_X2im4cgteHI0hqH_WzQygLccY1-es6Ki8fRH5WbU5t')
-//));
+try {
+    $media->upload('file', __DIR__ . '/public/wework.txt');
+} catch (Exception $e) {
+}
+
+try {
+    $data = $media->get('MEDIA_ID');
+    file_put_contents(__DIR__ . '/app/MEDIA_ID.jpg', $data);
+} catch (Exception $e) {
+}
+
+try {
+    $data = $media->getVoice('MEDIA_ID');
+    file_put_contents(__DIR__ . '/app/XXX', $data);
+} catch (Exception $e) {
+}
+
+try {
+    $media->uploadImg(__DIR__ . '/public/20180103195745.png');
+} catch (Exception $e) {
+}

@@ -1,78 +1,63 @@
 <?php
-/**
- * message.php.
- *
- * @author  wangbing <pithyone@vip.qq.com>
- * @date    2017/9/1
- */
-require 'bootstrap.php';
 
-use pithyone\wechat\Message\MpNewsArticle;
-use pithyone\wechat\Message\NewsArticle;
+$app = require __DIR__ . '/app.php';
 
-$test = $work->setAgentId('test');
-$message = $test->message;
+/** @var \WeWork\Api\Message $message */
+$message = $app->get('message');
 
-// 文本消息
-//var_dump($message->touser(['wb'])->text('文本消息')->send());
+$receiver = new \WeWork\Message\Receiver();
+$receiver->setUser('userid1');
+$receiver->setParty([1024, 2048]);
+$receiver->setTag([1024, 2048]);
 
-// 图片消息
-//var_dump($message
-//    ->touser(['wb'])
-//    ->media('image', '1fdSYYZY0Hx81jPTYhpiWFPXPlMB27HTlQHzaPhC25br6i1tjC_EQ4no0pYN9WD5p')
-//    ->send());
+try {
+    $text = new \WeWork\Message\Text("你的快递已到，请携带工卡前往邮件中心领取。\n出发前可查看<a href=\"http://work.weixin.qq.com\">邮件中心视频实况</a>，聪明避开排队。");
+    $message->send($receiver, $text, true);
+} catch (Exception $e) {
+}
 
-// 语音消息
-//var_dump($message
-//    ->touser(['wb'])
-//    ->safe(1)
-//    ->media('voice', '1hVfA-0XGW7JdiWj1GPnffA7PCuKILeRMMyQBWdXPUII')
-//    ->send());
+try {
+    $image = new \WeWork\Message\Image('MEDIA_ID');
+    $message->send($receiver, $image);
+} catch (Exception $e) {
+}
 
-// 视频消息
-//var_dump($message
-//    ->touser(['wb'])
-//    ->video(
-//        '1InLrL71VTYmjFXYTaelD5pHU6KC1GCWeVFvFDkhSiXOMZux2-GsHYreqwsHSpX86',
-//        'Title',
-//        'Description'
-//    )
-//    ->send());
+try {
+    $voice = new \WeWork\Message\Voice('MEDIA_ID');
+    $message->send($receiver, $voice);
+} catch (Exception $e) {
+}
 
-// 文件消息
-//var_dump($message
-//    ->touser(['wb'])
-//    ->media('file', '1fdSYYZY0Hx81jPTYhpiWFPXPlMB27HTlQHzaPhC25br6i1tjC_EQ4no0pYN9WD5p')
-//    ->send());
+try {
+    $video = new \WeWork\Message\Video('MEDIA_ID', 'Title', 'Description');
+    $message->send($receiver, $video);
+} catch (Exception $e) {
+}
 
-// 文本卡片消息
-//var_dump($message
-//    ->touser(['wb'])
-//    ->textCard(
-//        '领奖通知',
-//        '<div class="gray">2016年9月26日</div> <div class="normal">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class="highlight">请于2016年10月10日前联系行政同事领取</div>',
-//        'http://www.soso.com',
-//        '更多'
-//    )
-//    ->send());
+try {
+    $file = new \WeWork\Message\File('MEDIA_ID');
+    $message->send($receiver, $file);
+} catch (Exception $e) {
+}
 
-// 图文消息
-$article = new NewsArticle(
-    '中秋节礼品领取',
-    'http://www.soso.com',
-    '今年中秋节公司有豪礼相送',
-    'http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png',
-    '更多'
-);
-//var_dump($message->touser(['wb'])->news('news', [$article])->send());
+try {
+    $textCard = new \WeWork\Message\TextCard('领奖通知', "<div class=\"gray\">2016年9月26日</div><div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>", 'URL', '更多');
+    $message->send($receiver, $textCard);
+} catch (Exception $e) {
+}
 
-// 图文消息（mpnews）
-$article = new MpNewsArticle(
-    'Title',
-    '1fdSYYZY0Hx81jPTYhpiWFPXPlMB27HTlQHzaPhC25br6i1tjC_EQ4no0pYN9WD5p',
-    'Content',
-    'Author',
-    'http://www.soso.com',
-    'Digest description'
-);
-//var_dump($message->touser(['wb'])->news('mpnews', [$article])->send());
+try {
+    $news = new \WeWork\Message\News([
+        new \WeWork\Message\Article('中秋节礼品领取', 'URL', '今年中秋节公司有豪礼相送', 'http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png', '更多')
+    ]);
+    $message->send($receiver, $news);
+} catch (Exception $e) {
+}
+
+try {
+    $news = new \WeWork\Message\MPNews([
+        new \WeWork\Message\MPArticle('Title', 'MEDIA_ID', 'Content', 'Author', 'URL', 'Digest description')
+    ]);
+    $message->send($receiver, $news);
+} catch (Exception $e) {
+}

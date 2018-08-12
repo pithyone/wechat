@@ -1,32 +1,39 @@
 <?php
-/**
- * department.php.
- *
- * @author  wangbing <pithyone@vip.qq.com>
- * @date    2017/9/1
- */
-require 'bootstrap.php';
 
-$contacts = $work->setAgentId('contacts');
-$department = $contacts->department;
+$app = require __DIR__ . '/app.php';
 
-// 创建部门
-//var_dump($department->create([
-//    'name'     => '深圳研发中心',
-//    'parentid' => 1,
-//    'order'    => 100,
-//]));
+/** @var \WeWork\Api\Department $department */
+$department = $app->get('department');
 
-// 更新部门
-//var_dump($department->update([
-//    'id'       => 37,
-//    'name'     => '广州研发中心',
-//    'parentid' => 1,
-//    'order'    => 1,
-//]));
+try {
+    $department->create([
+        'name' => '广州研发中心',
+        'parentid' => 1,
+        'order' => 1,
+        'id' => 1024
+    ]);
+} catch (Exception $e) {
+}
 
-// 删除部门
-//var_dump($department->delete(37));
+try {
+    $department->update([
+        'id' => 1024,
+        'name' => '广州研发中心',
+    ]);
+} catch (Exception $e) {
+}
 
-// 获取部门列表
-//var_dump($department->lists(37));
+try {
+    $department->delete(1024);
+} catch (Exception $e) {
+}
+
+try {
+    $department->list();
+} catch (Exception $e) {
+}
+
+try {
+    $department->list(1);
+} catch (Exception $e) {
+}

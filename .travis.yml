@@ -1,23 +1,28 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
   - 7.1
-  - hhvm
-  - nightly
+  - 7.2
 
-matrix:
-  fast_finish: true
-  allow_failures:
-    - php: hhvm
-
-before_script:
+before_install:
+  - curl -o ~/.nvm/nvm.sh https://raw.githubusercontent.com/creationix/nvm/v0.33.11/nvm.sh
+  - bash -c "source ~/.nvm/nvm.sh; nvm install node; node --version"
   - composer self-update
+
+install:
+  - npm install
   - composer install --prefer-source --no-interaction --dev
 
-script: ./vendor/bin/phpunit --coverage-text --coverage-clover clover.xml
+script: ./vendor/bin/phpunit
 
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover clover.xml
+before_deploy:
+  - npm run docs:build
+
+deploy:
+  local-dir: docs/.vuepress/dist
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
