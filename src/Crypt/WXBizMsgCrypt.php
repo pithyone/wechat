@@ -52,7 +52,7 @@ class WXBizMsgCrypt
             return ErrorCode::$IllegalAesKey;
         }
 
-        $pc = new Prpcrypt($this->m_sEncodingAesKey);
+        $pc = new PrpCrypt($this->m_sEncodingAesKey);
         //verify msg_signature
         $sha1 = new SHA1;
         $array = $sha1->getSHA1($this->m_sToken, $sTimeStamp, $sNonce, $sEchoStr);
@@ -94,7 +94,7 @@ class WXBizMsgCrypt
      */
     public function EncryptMsg($sReplyMsg, $sTimeStamp, $sNonce, &$sEncryptMsg)
     {
-        $pc = new Prpcrypt($this->m_sEncodingAesKey);
+        $pc = new PrpCrypt($this->m_sEncodingAesKey);
 
         //加密
         $array = $pc->encrypt($sReplyMsg, $this->m_sCorpid);
@@ -146,7 +146,7 @@ class WXBizMsgCrypt
             return ErrorCode::$IllegalAesKey;
         }
 
-        $pc = new Prpcrypt($this->m_sEncodingAesKey);
+        $pc = new PrpCrypt($this->m_sEncodingAesKey);
 
         //提取密文
         $xmlparse = new XMLParse;

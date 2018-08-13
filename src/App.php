@@ -81,11 +81,11 @@ class App extends ContainerBuilder
      */
     private function registerLogger(): void
     {
-        if ($this->config['logging']) {
-            $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$this->config['logging']['path'], $this->config['logging']['level']]);
-        } else {
+        if (empty($logging = $this->config['logging'])) {
             $this->register('logger_handler', NullHandler::class);
+        } else {
+            $this->register('logger_handler', StreamHandler::class)
+                ->setArguments([$logging['path'], $logging['level']]);
         }
 
         $this->register('logger', Logger::class)
