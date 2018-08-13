@@ -2,6 +2,7 @@
 
 namespace WeWork;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use GuzzleHttp\Client;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
@@ -20,7 +21,7 @@ use WeWork\Http\HttpClient;
 class App extends ContainerBuilder
 {
     /**
-     * @var array
+     * @var ArrayCollection
      */
     private $config;
 
@@ -50,7 +51,7 @@ class App extends ContainerBuilder
     {
         parent::__construct();
 
-        $this->config = $config;
+        $this->config = new ArrayCollection($config);
 
         $this->registerServices();
     }
@@ -81,11 +82,11 @@ class App extends ContainerBuilder
      */
     private function registerLogger(): void
     {
-        if (empty($logging = $this->config['logging'])) {
-            $this->register('logger_handler', NullHandler::class);
-        } else {
+        if ($logging = $this->config->get('logging')) {
             $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$logging['path'], $logging['level']]);
+                ->setArguments([$logging['path'], isset($logging['level']) ? $logging['level'] : 'debug']);
+        } else {
+            $this->register('logger_handler', NullHandler::class);
         }
 
         $this->register('logger', Logger::class)
@@ -112,14 +113,10 @@ class App extends ContainerBuilder
      */
     private function registerCache(): void
     {
-        if ($driver = $this->config['cache']['driver']) {
-            $cache = $this->register('cache', $driver);
-        } else {
-            $cache = $this->register('cache', FilesystemCache::class);
-        }
+        $cache = $this->register('cache', FilesystemCache::class);
 
-        if ($this->config['cache']['path']) {
-            $cache->setArguments(['', 0, $this->config['cache']['path']]);
+        if ($config = $this->config->get('cache')) {
+            $cache->setArguments(['', 0, $config['path']]);
         }
     }
 
@@ -129,8 +126,8 @@ class App extends ContainerBuilder
     private function registerToken(): void
     {
         $this->register('token', Token::class)
-            ->addMethodCall('setCorpId', [$this->config['corp_id']])
-            ->addMethodCall('setSecret', [$this->config['secret']])
+            ->addMethodCall('setCorpId', [$this->config->get('corp_id')])
+            ->addMethodCall('setSecret', [$this->config->get('secret')])
             ->addMethodCall('setCache', [new Reference('cache')])
             ->addMethodCall('setHttpClient', [new Reference('http_client')]);
     }
@@ -144,7 +141,7 @@ class App extends ContainerBuilder
             ->setFactory([Request::class, 'createFromGlobals']);
 
         $this->register('crypt', WXBizMsgCrypt::class)
-            ->setArguments([$this->config['token'], $this->config['aes_key'], $this->config['corp_id']]);
+            ->setArguments([$this->config->get('token'), $this->config->get('aes_key'), $this->config->get('corp_id')]);
 
         $this->register('callback', Callback::class)
             ->setArguments([new Reference('request'), new Reference('crypt')]);
@@ -174,7 +171,7 @@ class App extends ContainerBuilder
             ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')]);
 
         if (in_array($id, ['agent', 'menu', 'message'])) {
-            $api->addMethodCall('setAgentId', [$this->config['agent_id']]);
+            $api->addMethodCall('setAgentId', [$this->config->get('agent_id')]);
         }
     }
 
@@ -184,7 +181,7 @@ class App extends ContainerBuilder
     private function registerJsApiTicket(): void
     {
         $this->register('jsApiTicket', JsApiTicket::class)
-            ->addMethodCall('setSecret', [$this->config['secret']])
+            ->addMethodCall('setSecret', [$this->config->get('secret')])
             ->addMethodCall('setCache', [new Reference('cache')])
             ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')]);
     }
@@ -205,7 +202,7 @@ class App extends ContainerBuilder
     private function registerJssdk(): void
     {
         $this->register('jssdk', JSSdk::class)
-            ->addMethodCall('setCorpId', [$this->config['corp_id']])
+            ->addMethodCall('setCorpId', [$this->config->get('corp_id')])
             ->addMethodCall('setJsApiTicket', [new Reference('jsApiTicket')])
             ->addMethodCall('setTicket', [new Reference('ticket')]);
     }

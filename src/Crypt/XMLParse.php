@@ -21,10 +21,8 @@ class XMLParse
             $xml = new DOMDocument();
             $xml->loadXML($xmltext);
             $array_e = $xml->getElementsByTagName('Encrypt');
-            $array_a = $xml->getElementsByTagName('ToUserName');
             $encrypt = $array_e->item(0)->nodeValue;
-            $tousername = $array_a->item(0)->nodeValue;
-            return array(0, $encrypt, $tousername);
+            return array(0, $encrypt);
         } catch (\Exception $e) {
             return array(ErrorCode::$ParseXmlError, null, null);
         }

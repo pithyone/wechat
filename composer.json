@@ -9,6 +9,7 @@
         "ext-dom": "*",
         "ext-json": "*",
         "ext-openssl": "*",
+        "doctrine/collections": "^1.5",
         "guzzlehttp/guzzle": "^6.3",
         "monolog/monolog": "^1.23",
         "symfony/cache": "^4.1",
