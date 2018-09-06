@@ -10,14 +10,8 @@ module.exports = {
     serviceWorker: true,
     themeConfig: {
         sidebar: [
-            {
-                title: '开始',
-                collapsable: false,
-                children: [
-                    '/installation',
-                    '/token'
-                ]
-            },
+            '/quick-start',
+            '/token',
             {
                 title: '通讯录管理',
                 collapsable: false,
@@ -41,6 +35,7 @@ module.exports = {
                 ]
             },
             '/media',
+            '/auth',
             {
                 title: 'JS-SDK',
                 collapsable: false,

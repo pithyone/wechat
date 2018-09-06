@@ -1,21 +1,6 @@
 # 部门管理
 
 ```php
-$app = new \WeWork\App([
-    'corp_id' => '企业ID',
-    'secret' => '通讯录同步应用密钥',
-    'cache' => [
-        'path' => __DIR__ . '/cache'
-    ],
-    'logging' => [
-        'path' => __DIR__ . '/log/app.log',
-        'level' => 'debug'
-    ]
-]);
-```
-
-```php
-/** @var \WeWork\Api\Department $department */
 $department = $app->get('department');
 ```
 

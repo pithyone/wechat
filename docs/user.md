@@ -1,21 +1,6 @@
 # 成员管理
 
 ```php
-$app = new \WeWork\App([
-    'corp_id' => '企业ID',
-    'secret' => '通讯录同步应用密钥',
-    'cache' => [
-        'path' => __DIR__ . '/cache'
-    ],
-    'logging' => [
-        'path' => __DIR__ . '/log/app.log',
-        'level' => 'debug'
-    ]
-]);
-```
-
-```php
-/** @var \WeWork\Api\User $user */
 $user = $app->get('user');
 ```
 
@@ -85,16 +70,4 @@ $user->convertOpenidToUserId('oDOGms-6yCnGrRovBj2yHij5JL6E');
 
 ```php
 $user->authSuccess('zhangsan');
-```
-
-## 根据code获取成员信息
-
-```php
-$user->getInfo('CODE');
-```
-
-## 使用user_ticket获取成员详情
-
-```php
-$user->getDetail('USER_TICKET');
 ```
