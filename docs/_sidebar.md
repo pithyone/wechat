@@ -37,4 +37,9 @@
   * [打卡管理](checkin.md)
   * [审批管理](corp.md)
   
-* [电子发票](invoice.md)  
+* [电子发票](invoice.md) 
+
+* 集成
+
+  * [Laravel](laravel.md)
+  * [ThinkPHP](thinkphp.md) 
