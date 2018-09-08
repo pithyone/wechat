@@ -1,11 +1,17 @@
-# 获取access_token
+# access_token
 
 ```php
-$app->get('token')->get();
+$token = $app->get('token');
 ```
 
-## 刷新access_token
+## 获取
 
 ```php
-$app->get('token')->get(true);
+$token->get();
+```
+
+## 刷新
+
+```php
+$token->get(true);
 ```

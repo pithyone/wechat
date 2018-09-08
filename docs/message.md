@@ -4,6 +4,8 @@
 $message = $app->get('message');
 ```
 
+消息接收者
+
 ```php
 $receiver = new \WeWork\Message\Receiver();
 $receiver->setUser('userid1');

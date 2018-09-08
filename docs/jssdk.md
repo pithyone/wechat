@@ -1,17 +1,25 @@
 # JS-SDK
 
+## 获取企业的jsapi_ticket
+
 ```php
-$jssdk = $app->get('jssdk');
+$app->get('jsApiTicket')->get();
 ```
 
-## 发票签名
+## 生成权限验证配置
 
 ```php
-$jssdk->getChooseInvoiceConfig();
+$app->get('jssdk')->getConfig('URL');
 ```
 
-## 权限验证配置
+## 获取电子发票ticket
 
 ```php
-$jssdk->getConfig('URL');
+$app->get('ticket')->get();
+```
+
+## 生成拉起电子发票列表配置
+
+```php
+$app->get('jssdk')->getChooseInvoiceConfig();
 ```

@@ -7,8 +7,6 @@
 
 > 最最最简单易用的企业微信SDK
 
-https://pithyone.github.io/wechat/
-
 ## Requirement
 
 - PHP >= 7.1.3

@@ -1,4 +1,4 @@
-# 快速上手
+# 快速开始
 
 ## 安装
 
@@ -29,7 +29,7 @@ $app = new \WeWork\App(
 );
 ```
 
-获取access_token：
+以获取 access_token 为例：
 
 ```php
 $app->get('token')->get();

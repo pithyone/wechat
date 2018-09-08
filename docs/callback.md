@@ -6,6 +6,8 @@
 $callback = $app->get('callback');
 ```
 
+示例：
+
 ```php
 switch ($callback->get('MsgType')) {
     case 'text': // 文本消息
