@@ -1,8 +1,9 @@
 <?php
 
-namespace WeWork;
+namespace WeWork\Laravel;
 
 use Illuminate\Support\ServiceProvider;
+use WeWork\App;
 
 class WeWorkServiceProvider extends ServiceProvider
 {
@@ -39,19 +40,13 @@ class WeWorkServiceProvider extends ServiceProvider
             function ($app, $parameters) {
                 $wework = array_merge($app['config']['wework'], $parameters);
 
-                $config = array_merge(
-                    $wework['agents'][$wework['default']],
-                    [
-                        'corp_id' => $wework['corp_id'],
-                        'logging' => [
-                            'path'  => $wework['log']['file'],
-                            'level' => $wework['log']['level'],
-                        ],
-                        'cache'   => [
-                            'path' => $app['config']['cache.stores.file.path'],
-                        ],
-                    ]
-                );
+                $agent = $wework['agents'][$wework['default']];
+
+                $config = array_merge($agent, $wework);
+
+                $config['log'] = LogBridge::class;
+
+                $config['cache'] = CacheBridge::class;
 
                 return new App($config);
             }

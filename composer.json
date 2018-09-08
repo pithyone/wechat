@@ -37,7 +37,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "WeWork\\WeWorkServiceProvider"
+                "WeWork\\Laravel\\WeWorkServiceProvider"
             ]
         }
     }
