@@ -14,15 +14,15 @@ composer require pithyone/wechat
 $app = new \WeWork\App(
     [
         'corp_id'  => 'xxxxxxxxxxxxxxxxxx',
-        'agent_id' => 0,
         'secret'   => 'fsAQmTHCGvd5ZsRJnkr9jj9aCR2sqOKypAUw6D3Jy5Y',
-        'token'    => 'U2AemzcBENS2vaZHio6DbIEXBTZWgxI',
-        'aes_key'  => 'oQDmXL6uyPhtcREx4MV1LGH3BYA4fizacLkD53FHuJT',
+        'agent_id' => 0,
+        'token'    => 'cxvhat5gfJW30J9YUsq',
+        'aes_key'  => 'ULPUgqKDC8LTI1fRJ1jOxHrwbUV2QxR5jnSKrlh4meT',
         'cache'    => [
-            'path' => '/cache',
+            'path' => __DIR__.'/cache',
         ],
-        'logging'  => [
-            'path'  => '/log/app.log',
+        'log'      => [
+            'file'  => __DIR__.'/log/app.log',
             'level' => 'debug',
         ],
     ]
