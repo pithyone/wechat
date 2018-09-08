@@ -7,6 +7,8 @@ use GuzzleHttp\Client;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Simple\FilesystemCache;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -29,19 +31,19 @@ class App extends ContainerBuilder
      * @var array
      */
     private $apiServices = [
-        'agent' => Api\Agent::class,
-        'appChat' => Api\AppChat::class,
-        'batch' => Api\Batch::class,
-        'checkIn' => Api\CheckIn::class,
-        'corp' => Api\Corp::class,
-        'crm' => Api\CRM::class,
+        'agent'      => Api\Agent::class,
+        'appChat'    => Api\AppChat::class,
+        'batch'      => Api\Batch::class,
+        'checkIn'    => Api\CheckIn::class,
+        'corp'       => Api\Corp::class,
+        'crm'        => Api\CRM::class,
         'department' => Api\Department::class,
-        'invoice' => Api\Invoice::class,
-        'media' => Api\Media::class,
-        'menu' => Api\Menu::class,
-        'message' => Api\Message::class,
-        'tag' => Api\Tag::class,
-        'user' => Api\User::class
+        'invoice'    => Api\Invoice::class,
+        'media'      => Api\Media::class,
+        'menu'       => Api\Menu::class,
+        'message'    => Api\Message::class,
+        'tag'        => Api\Tag::class,
+        'user'       => Api\User::class,
     ];
 
     /**
@@ -82,13 +84,25 @@ class App extends ContainerBuilder
      */
     private function registerLogger(): void
     {
-        if ($logging = $this->config->get('logging')) {
+        $log = $this->config->get('log');
+
+        if (is_subclass_of($log, LoggerInterface::class)) {
+            $this->register('logger', $log);
+        } elseif ($log) {
             $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$logging['path'], isset($logging['level']) ? $logging['level'] : 'debug']);
+                ->setArguments([$log['file'], isset($log['level']) ? $log['level'] : 'debug']);
+            $this->registerMonolog();
         } else {
             $this->register('logger_handler', NullHandler::class);
+            $this->registerMonolog();
         }
+    }
 
+    /**
+     * @return void
+     */
+    private function registerMonolog(): void
+    {
         $this->register('logger', Logger::class)
             ->addArgument('WeWork')
             ->addMethodCall('setTimezone', [new \DateTimeZone('PRC')])
@@ -113,10 +127,16 @@ class App extends ContainerBuilder
      */
     private function registerCache(): void
     {
-        $cache = $this->register('cache', FilesystemCache::class);
+        $cache = $this->config->get('cache');
 
-        if ($config = $this->config->get('cache')) {
-            $cache->setArguments(['', 0, $config['path']]);
+        if (is_subclass_of($cache, CacheInterface::class)) {
+            $this->register('cache', $cache);
+        } else {
+            $service = $this->register('cache', FilesystemCache::class);
+
+            if ($cache && isset($cache['path'])) {
+                $service->setArguments(['', 0, $cache['path']]);
+            }
         }
     }
 
@@ -163,6 +183,7 @@ class App extends ContainerBuilder
     /**
      * @param string $id
      * @param string $class
+     *
      * @return void
      */
     private function registerApi(string $id, string $class): void
