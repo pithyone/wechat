@@ -8,9 +8,9 @@ use WeWork\Tests\TestCase;
 class MarkdownTest extends TestCase
 {
     /**
-     * @var TextCard
+     * @var Markdown
      */
-    protected $textCard;
+    protected $markdown;
 
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class MarkdownTest extends TestCase
     {
         parent::setUp();
 
-        $this->textCard = new Markdown('content');
+        $this->markdown = new Markdown('content');
     }
 
     /**
